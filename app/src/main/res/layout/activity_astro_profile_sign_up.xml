@@ -1,0 +1,995 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/colorwhite"
+    android:orientation="vertical"
+    tools:context=".AstroProfileSignUp">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="61.5dip"
+        android:background="@color/colorwhite"
+        android:gravity="left"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/montserrat_medium"
+            android:gravity="center"
+            android:text="Complte Profile"
+            android:textColor="@color/black"
+            android:textSize="16.299988sp" />
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:background="#ffefefef">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="25dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:padding="10.0dip"
+                    android:text="Personal_Information"
+                    android:textColor="#ff000000"
+                    android:textSize="13.299988sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/textview_background_for_profile">
+
+                <TextView
+                    android:id="@+id/P5_full_name_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:background="#057C0F0F"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center|left"
+                    android:maxLength="30"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="12.5sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/textview_background_for_profile">
+
+                <TextView
+                    android:id="@+id/P5_email_id_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:background="#057C0F0F"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center|left"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="13.0sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/textview_background_for_profile">
+
+                <TextView
+                    android:id="@+id/P5_mobile_no_txt"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:background="#057C0F0F"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center|left"
+                    android:inputType="text"
+                    android:maxLength="30"
+                    android:paddingLeft="15.0dip"
+                    android:paddingTop="5.0dip"
+                    android:paddingBottom="5.0dip"
+                    android:textColor="@color/black"
+                    android:textSize="13.0sp" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55.0dip"
+                android:layout_marginTop="18.5dip"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Please enter your experience"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12.299988sp" />
+
+            <RelativeLayout
+                android:id="@+id/p5_Date_of_Birth"
+                android:layout_width="fill_parent"
+                android:layout_height="50.0dip"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext">
+
+                <EditText
+                    android:id="@+id/P5_edit_experience"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Your Experience"
+                    android:layout_marginTop="5dp"
+                    android:paddingTop="9dp"
+                    android:paddingStart="5dp"
+                    android:maxLength="2"
+                    android:inputType="number"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="14dp">
+                </EditText>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55.0dip"
+                android:layout_marginTop="18.5dip"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Enter aadhar no."
+                android:textColor="@color/colorPrimary"
+                android:textSize="12.299988sp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/P5_edit_aadhar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Your aadhar no."
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:paddingStart="5dp"
+                    android:paddingTop="9dp"
+                    android:maxLength="12"
+                    android:inputType="number"
+                    android:background="@null"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="14dp">
+                </EditText>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55.0dip"
+                android:layout_marginTop="18.5dip"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Enter your consultaion charges"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12.299988sp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/P5_edit_ccharge"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Your Charges"
+                    android:layout_marginTop="5dp"
+                    android:background="@null"
+                    android:paddingTop="9dp"
+                    android:paddingStart="5dp"
+                    android:maxLength="3"
+                    android:inputType="number"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="14dp">
+                </EditText>
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55.0dip"
+                android:layout_marginTop="18.5dip"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Enter pan no."
+                android:textColor="@color/colorPrimary"
+                android:textSize="12.299988sp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/P5_edit_penNo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Enter Your Pan Card No."
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:paddingStart="5dp"
+                    android:maxLength="10"
+                    android:capitalize="characters"
+                    android:paddingTop="9dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="14dp">
+
+                </EditText>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55.0dip"
+                android:layout_marginTop="18.5dip"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Enter Your Profile In Brief"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12.299988sp" />
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <EditText
+                    android:id="@+id/P5_edit_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:hint="Enter Your Profile"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@null"
+                    android:paddingTop="8dp"
+                    android:paddingStart="5dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textSize="14dp">
+
+                </EditText>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/p5_spineer_expertise"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5.5dip"
+                    android:paddingBottom="5.0dip"
+                    android:text="Expertise"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12.5sp" />
+
+
+                <!--                <com.hopefloats.mobiforce.Utilities.MultiSelectionSpinnerSearch.MultiSpinnerSearch-->
+                <!--                    android:id="@id/spinner_skill_set"-->
+                <!--                    android:layout_width="fill_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_centerVertical="true"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_marginLeft="10.0dip"-->
+                <!--                    android:layout_marginRight="10.0dip"-->
+                <!--                    android:background="@color/colorwhite"-->
+                <!--                    android:padding="@dimen/dp5"-->
+                <!--                    android:theme="@style/spinnerThemeAboutMeScreen" />-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_arrow_drop_down" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="10.0dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/p5_Spinner_Speciality"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5.5dip"
+                    android:paddingBottom="5.0dip"
+                    android:text="Speciality"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12.5sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_arrow_drop_down" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/p5_Spinner_Languages"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5.5dip"
+                    android:paddingBottom="5.0dip"
+                    android:text="Languages"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12.5sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_arrow_drop_down" />
+            </RelativeLayout>
+
+            <!--<RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="10.0dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/p5_Spinner_Location"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5.5dip"
+                    android:paddingBottom="5.0dip"
+                    android:text="Location"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12.5sp" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_arrow_drop_down" />
+            </RelativeLayout>-->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dip"
+                android:layout_marginTop="19.5dip"
+                android:layout_marginRight="35.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/P5_working_time"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="10.0dip"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingTop="5.5dip"
+                    android:paddingBottom="5.0dip"
+                    android:text="Select Working Time"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="12.5sp" />
+
+
+                <!--                <com.hopefloats.mobiforce.Utilities.MultiSelectionSpinnerSearch.MultiSpinnerSearch-->
+                <!--                    android:id="@id/spinner_skill_set"-->
+                <!--                    android:layout_width="fill_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_centerVertical="true"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:layout_marginLeft="10.0dip"-->
+                <!--                    android:layout_marginRight="10.0dip"-->
+                <!--                    android:background="@color/colorwhite"-->
+                <!--                    android:padding="@dimen/dp5"-->
+                <!--                    android:theme="@style/spinnerThemeAboutMeScreen" />-->
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5.0dip"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_baseline_arrow_drop_down" />
+            </RelativeLayout>
+
+            <!--<ListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />-->
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#ffefefef">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="25dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:padding="10.0dip"
+                    android:text=" Choose Address City"
+                    android:textColor="#ff000000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55.0dip"
+                android:layout_marginTop="18.5dip"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Select State"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12.299988sp" />
+
+            <RelativeLayout
+                android:id="@+id/p5_state_basic_profile"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="39.5dip"
+                android:layout_marginTop="5.0dip"
+                android:layout_marginRight="31.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:paddingTop="17.0dip"
+                android:paddingBottom="17.0dip">
+
+                <Spinner
+                    android:id="@+id/P5_spinner_state"
+                    android:layout_width="fill_parent"
+                    android:layout_height="25.0dip"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14.5dip"
+                    android:layout_marginRight="19.5dip"
+                    android:background="@color/colorwhite"
+                    android:paddingTop="0.0dip"
+                    android:paddingBottom="0.0dip"
+                    android:spinnerMode="dialog" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="24.0dip"
+                    android:src="@drawable/ic_baseline_arrow_drop_down" />
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="55.0dip"
+                android:layout_marginTop="18.5dip"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Select City"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12.299988sp" />
+
+            <RelativeLayout
+                android:id="@+id/p5_address_city_astro_complete_registration"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="39.5dip"
+                android:layout_marginTop="5.0dip"
+                android:layout_marginRight="31.0dip"
+                android:background="@drawable/sp_edittext"
+                android:orientation="horizontal"
+                android:paddingTop="17.0dip"
+                android:paddingBottom="17.0dip">
+
+                <Spinner
+                    android:id="@+id/P5_spinner_city"
+                    android:layout_width="fill_parent"
+                    android:layout_height="25.0dip"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="14.5dip"
+                    android:layout_marginRight="19.5dip"
+                    android:background="@color/colorwhite"
+                    android:paddingTop="0.0dip"
+                    android:paddingBottom="0.0dip"
+                    android:spinnerMode="dialog" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="24.0dip"
+                    android:src="@drawable/ic_baseline_arrow_drop_down" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="#ffefefef">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="25dp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:padding="10.0dip"
+                    android:text="Do You Know Face and Palm Reading"
+                    android:textColor="#ff000000"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="35.0dp"
+                android:layout_marginRight="55.0dp"
+                android:layout_marginTop="18.5dp">
+
+                <TextView
+                    android:id="@+id/p5_switch_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Are You a Palm Reader?"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="13.299988sp"
+                    android:fontFamily="@font/montserrat_regular">
+                </TextView>
+
+                <Switch
+                    android:id="@+id/abc_astro_profile_sign_up_switch_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/p5_switch_text">
+                </Switch>
+
+                <TextView
+                    android:id="@+id/p5_switch_text_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Are You a Face  Reader?"
+                    android:textSize="13.299988sp"
+                    android:layout_marginTop="15dp"
+                    android:layout_below="@id/p5_switch_text"
+                    android:textColor="@color/colorPrimary"
+                    android:fontFamily="@font/montserrat_regular">
+                </TextView>
+
+                <Switch
+                    android:id="@+id/abc_astro_profile_sign_up_switch_btn_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/p5_switch_text"
+                    android:layout_marginTop="15dp"
+                    android:layout_toRightOf="@id/p5_switch_text_1">
+                </Switch>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="15.0dp"
+                android:layout_marginLeft="15.0dp"
+                android:layout_marginTop="18.5dp">
+
+                <RelativeLayout
+                    android:id="@+id/edit_relative_face"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:visibility="gone"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_marginTop="19.5dip"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@drawable/sp_edittext"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <EditText
+                        android:id="@+id/edit_face"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Your Charges"
+                        android:layout_marginTop="5dp"
+                        android:background="@null"
+                        android:paddingTop="3dp"
+                        android:paddingStart="5dp"
+                        android:maxLength="3"
+                        android:inputType="number"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textSize="14dp">
+                    </EditText>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/edit_relative_palm"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:visibility="gone"
+                    android:layout_marginLeft="15.0dip"
+                    android:layout_marginTop="19.5dip"
+                    android:layout_marginRight="15.0dip"
+                    android:background="@drawable/sp_edittext"
+                    android:orientation="horizontal"
+                    android:layout_below="@id/edit_relative_face"
+                    android:padding="5dp">
+
+                    <EditText
+                        android:id="@+id/edit_palm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Enter Your Charges"
+                        android:layout_marginTop="5dp"
+                        android:background="@null"
+                        android:paddingTop="3dp"
+                        android:paddingStart="5dp"
+                        android:maxLength="3"
+                        android:inputType="number"
+                        android:layout_marginLeft="5dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textSize="14dp">
+                    </EditText>
+                </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20.0dip"
+            android:background="#ffefefef">
+
+            <ImageView
+                android:id="@+id/p5_upload_documents_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20.5dip"
+                android:layout_marginTop="12.5dip"
+                android:layout_marginBottom="12.5dip"
+                app:srcCompat="@drawable/ic_baseline_cloud_upload" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="4.0dip"
+                android:layout_toRightOf="@+id/p5_upload_documents_txt"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Upload Documents"
+                android:textColor="#ff999999"
+                android:textSize="12.5sp" />
+        </RelativeLayout>
+
+        <!--            <RelativeLayout-->
+            <!--                android:id="@+id/p5_upload_aadhar_card"-->
+            <!--                android:layout_width="120.0dip"-->
+            <!--                android:layout_height="100.0dip"-->
+            <!--                android:layout_gravity="left"-->
+            <!--                android:layout_marginTop="26.0dip"-->
+            <!--                android:background="@drawable/bg_tab_9_radius">-->
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/p5_aadhar_upload"-->
+            <!--                    android:layout_width="fill_parent"-->
+            <!--                    android:layout_height="fill_parent"-->
+            <!--                    android:layout_centerHorizontal="true"-->
+            <!--                    android:layout_centerVertical="true"-->
+            <!--                    android:layout_margin="15.0dip"-->
+            <!--                    android:scaleType="fitXY"-->
+            <!--                    android:src="@drawable/ic_baseline_cloud_upload" />-->
+            <!--            </RelativeLayout>-->
+
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="center"-->
+            <!--                android:layout_marginTop="14.0dip"-->
+            <!--                android:fontFamily="@font/montserrat_medium"-->
+            <!--                android:text="Upload Aadhar Card"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="10.5sp" />-->
+
+            <!--            <RelativeLayout-->
+            <!--                -->
+            <!--                android:id="@+id/p5_upload_pan_card"-->
+            <!--                android:layout_width="120.0dip"-->
+            <!--                android:layout_height="100.0dip"-->
+            <!--                android:layout_gravity="right"-->
+            <!--                android:layout_marginTop="26.0dip"-->
+            <!--                android:background="@drawable/bg_tab_9_radius">-->
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/p5_pan_upload"-->
+            <!--                    android:layout_width="fill_parent"-->
+            <!--                    android:layout_height="fill_parent"-->
+            <!--                    android:layout_centerHorizontal="true"-->
+            <!--                    android:layout_centerVertical="true"-->
+            <!--                    android:layout_margin="15.0dip"-->
+            <!--                    android:scaleType="fitXY"-->
+            <!--                    android:src="@drawable/ic_baseline_cloud_upload" />-->
+            <!--            </RelativeLayout>-->
+
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_gravity="right"-->
+            <!--                android:layout_marginTop="14.0dip"-->
+            <!--                android:fontFamily="@font/montserrat_medium"-->
+            <!--                android:text="Upload Pan Card"-->
+            <!--                android:textColor="@color/black"-->
+            <!--                android:textSize="10.5sp" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/aadharImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_baseline_cloud_upload">
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Aadhar Card"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="#000"
+                        android:layout_marginTop="5dp">
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/pancardImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_baseline_cloud_upload">
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pan Card"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="#000"
+                        android:layout_marginTop="5dp">
+                    </TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:padding="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/certificateImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_baseline_cloud_upload">
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Certificate"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textSize="15sp"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_marginTop="5dp">
+                    </TextView>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_weight="5"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/photoImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_baseline_cloud_upload">
+                    </ImageView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Your Photo"
+                        android:textSize="15sp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center"
+                        android:textColor="#000"
+                        android:layout_marginTop="5dp">
+                    </TextView>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/p5_btn_submit"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:text="submit"
+                android:textSize="17sp"
+                android:background="@drawable/custtom_button"
+                android:textStyle="bold"
+                android:textColor="#fff"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp">
+            </Button>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6fa"
+    tools:context=".AstrologerSignUp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/AstroSignlogo"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="60dp"
+            android:src="@drawable/logo" />
+
+        <ImageView
+            android:id="@+id/AstroSigntextSign"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/AstroSignlogo"
+            android:layout_marginTop="-220dp"
+            android:src="@drawable/saparaterdesign" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AstroSigntextName"
+            android:textColorHint="#000"
+            android:layout_below="@id/AstroSigntextSign"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Name"
+                android:id="@+id/AstroSignsignUpName"
+                android:inputType="textPersonName"
+                android:textSize="17sp"
+                android:fontFamily="@font/bangla_sangamold"
+                android:textColor="#000">
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AstroSigntextMobile"
+            android:layout_below="@id/AstroSigntextName"
+            android:textColorHint="#000"
+            android:layout_centerHorizontal="true"
+            android:background="#fff"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:visibility="gone"
+            android:layout_marginRight="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Mobile No"
+                android:editable="false"
+                android:focusable="false"
+                android:id="@+id/AstroSignsignUpMobile"
+                android:fontFamily="@font/bangla_sangamold"
+                android:inputType="none"
+                android:textSize="17sp"
+                android:textColor="#000">
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/AstroSigntextGmail"
+            android:layout_below="@id/AstroSigntextMobile"
+            android:textColorHint="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Email Address"
+                android:id="@+id/AstroSignsignUpEmail"
+                android:inputType="textEmailAddress"
+                android:textSize="17sp"
+                android:fontFamily="@font/bangla_sangamold"
+                android:textColor="#000">
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/AstroSignsubmitSignUp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="Next"
+            android:textSize="17sp"
+            android:background="@drawable/custtom_button"
+            android:textStyle="bold"
+            android:textColor="#fff"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_below="@id/AstroSigntextGmail">
+        </Button>
+
+    </RelativeLayout>
+
+</ScrollView>

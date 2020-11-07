@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f6fa"
+    android:id="@+id/loginLoader"
+    tools:context=".LogIn">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logo" />
+
+    <ImageView
+        android:id="@+id/textSign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/logo"
+        android:layout_marginTop="-250dp"
+        android:src="@drawable/saparaterdesign" />
+
+
+    <TextView
+        android:textColor="@color/colorPrimaryDark"
+        android:fontFamily="@font/montserrat_regular"
+        android:gravity="center"
+        android:text="Enter mobile no for Login or Signup"
+        android:layout_marginTop="-80dp"
+        android:layout_below="@+id/textSign"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <!--    <ImageView-->
+    <!--        android:id="@+id/textSign"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        android:src="@drawable/login">-->
+    <!--    </ImageView>-->
+    <LinearLayout
+        android:backgroundTint="@color/gray"
+        android:layout_marginTop="-40dp"
+        android:layout_marginLeft="7dp"
+        android:id="@+id/P1_Home_TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textSign"
+        android:orientation="horizontal"
+        android:padding="2dp">
+
+        <ImageView
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="5"
+            android:paddingLeft="8dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/ic_mobile" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textMobile"
+            android:layout_width="10dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="15dp"
+            android:layout_weight="45"
+            android:textColorHint="@color/gray">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/logInMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/bangla_sangamold"
+                android:hint="Mobile No"
+                android:inputType="phone"
+                android:maxLength="10"
+                android:maxLines="1"
+                android:textColor="@color/textcolour"
+                android:textSize="15sp"></com.google.android.material.textfield.TextInputEditText>
+
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    <!--    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textPass"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_below="@+id/textMobile"
+            android:layout_marginTop="20dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#000"
+            android:textColorHint="#000">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/logInPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:textColor="#000"
+                android:textSize="17sp">
+            </com.google.android.material.textfield.TextInputEditText>
+
+        </com.google.android.material.textfield.TextInputLayout>-->
+
+    <Button
+        android:fontFamily="@font/montserrat_bold"
+        android:id="@+id/signIn"
+        android:layout_width="280dp"
+        android:layout_height="45dp"
+        android:layout_below="@id/P1_Home_TextView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/custtom_button"
+        android:text="Login"
+        android:textColor="#fff"
+        android:textSize="15sp"
+        android:textStyle="bold"></Button>
+
+    <!--<TextView
+        android:textStyle="bold"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/forget"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/signIn"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/bangla_sangamold"
+        android:gravity="center"
+        android:text="@string/forget_password"
+        android:textColor="@color/design_default_color_primary_dark"
+        android:textSize="15sp">
+
+    </TextView>-->
+
+    <TextView
+        android:id="@+id/notRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center"
+        android:text="@string/Astrologer_Login"
+        android:textColor="@color/textcolour"
+        android:textSize="15sp"
+        android:textStyle="bold"></TextView>
+
+</RelativeLayout>

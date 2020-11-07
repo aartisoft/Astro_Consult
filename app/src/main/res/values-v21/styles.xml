@@ -1,0 +1,26 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="spinnerThemeAboutMeScreen">
+        <item name="android:textSize">12.5sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <!--        <item name="android:background">@color/colorPrimary</item>-->
+        <item name="android:singleLine">false</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <!--<style name="spinnerThemeAboutMeScreen">
+        <item name="android:textSize">12.5sp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        &lt;!&ndash;        <item name="android:background">@color/colorPrimary</item>&ndash;&gt;
+        <item name="android:singleLine">false</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>-->
+</resources>

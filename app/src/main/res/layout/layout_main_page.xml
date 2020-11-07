@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:id="@+id/linearData"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/relate1"
+        android:layout_width="190dp"
+        android:layout_height="185dp"
+        android:layout_weight="1"
+        android:background="@drawable/relativebackgroundhome">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageRecycle"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/rinku"
+            app:civ_border_color="#fff"
+            app:civ_border_width="2dp" />
+
+        <!--                                <ImageView-->
+        <!--                                    android:background="@drawable/card_view_background"-->
+        <!--                                    android:layout_width="match_parent"-->
+        <!--                                    android:layout_height="150dp"/>-->
+
+        <TextView
+            android:id="@+id/nametxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageRecycle"
+            android:layout_centerHorizontal="true"
+            android:fontFamily="@font/bangla_sangamold"
+            android:text="Amit Kumar"
+            android:textColor="@color/textcolour_black"
+            android:textSize="13dp" />
+
+        <RatingBar
+            android:progressBackgroundTint="@color/rating_colour"
+            android:id="@+id/rating"
+            style="@android:style/Widget.DeviceDefault.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nametxt"
+            android:layout_centerHorizontal="true"
+            android:progressTint="@color/rating_colour"
+            android:rating="5" />
+        <TextView
+            android:layout_marginTop="2dp"
+            android:id="@+id/P1_Home_Rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nametxt"
+            android:layout_centerHorizontal="true"
+            android:layout_toRightOf="@+id/rating"
+            android:textColor="@color/textcolour_black"
+            android:textSize="10dp"
+            android:fontFamily="@font/bangla_sangamold"
+            android:text="(4.5)"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/rating"
+            android:layout_marginTop="5dp"
+            android:id="@+id/layoutRay">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/locationimage"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/rating"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="3dp"
+                    android:background="@drawable/ic_location_on_black_24dp" />
+
+                <TextView
+                    android:layout_marginLeft="3dp"
+                    android:fontFamily="@font/bangla_sangamold"
+                    android:id="@+id/locationtxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rating"
+                    android:layout_toRightOf="@+id/locationimage"
+                    android:text="Delhi"
+                    android:textColor="@color/textcolour_black"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="5"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/expimage"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_below="@+id/rating"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_toRightOf="@+id/locationtxt"
+                    android:background="@drawable/ic_experience" />
+
+                <TextView
+                    android:fontFamily="@font/bangla_sangamold"
+                    android:id="@+id/experince"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rating"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@+id/expimage"
+                    android:text="5 year Experience"
+                    android:textColor="@color/textcolour_black"
+                    android:textSize="10dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/feetxt"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layoutRay"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:textAlignment="center"
+            android:background="@drawable/round_button"
+            android:fontFamily="@font/bangla_sangamold"
+            android:padding="3dp"
+            android:text=" Rs.50/Min "
+            android:textColor="#ffffff"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+</LinearLayout>

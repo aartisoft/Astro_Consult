@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.Wallet">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:background="@drawable/details_page_header_background"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/pAvailWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center"
+                    android:text="Wallet Balance"
+                    android:textColor="@color/colourwhite"
+                    android:textSize="15sp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageView
+                    android:layout_toLeftOf="@+id/p1AvailWallet"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/rupees_icon_white"
+                    android:id="@+id/icon_rupees"
+                    android:layout_width="37dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_marginRight="-10dp"
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/p1AvailWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text=" __.__   "
+                    android:textColor="@color/colourwhite"
+                    android:textSize="40sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/p2AvailWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/p1AvailWallet"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center"
+                    android:text="Last Payment: Rs. 0"
+                    android:textColor="@color/colourwhite"
+                    android:textSize="14sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/p3AvailWallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/p1AvailWallet"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/p2AvailWallet"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center|end"
+                    android:text=""
+                    android:textColor="@color/colourwhite"
+                    android:textSize="14sp">
+                </TextView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_weight="6.5"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:id="@+id/walletAmount"
+                            android:layout_marginLeft="25dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="60dp"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:hint="Amount"
+                            android:inputType="number"
+                            android:maxLength="5"
+                            android:maxLines="1"
+                            android:textSize="17sp">
+                            <requestFocus />
+                        </EditText>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:layout_marginLeft="10dp"
+                            android:padding="10dp"
+                            android:id="@+id/Wallet_admoney"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/custtom_button"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Add Money"
+                            android:textColor="#fff"
+                            android:textSize="15sp"
+                            android:textStyle="bold">
+
+                        </Button>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="1dp"-->
+<!--                    android:layout_margin="10dp"-->
+<!--                    android:layout_marginTop="20dp"-->
+<!--                    android:layout_weight="7"-->
+<!--                    android:orientation="vertical">-->
+
+<!--                <LinearLayout-->
+<!--                        android:orientation="horizontal"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="5">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="Activity"-->
+<!--                            android:textColor="@color/textcolour_black"-->
+<!--                            android:textSize="14dp"-->
+<!--                            android:textStyle="bold"></TextView>-->
+
+<!--                    </LinearLayout>-->
+
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_weight="5">-->
+
+<!--                        <TextView-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="match_parent"-->
+<!--                            android:gravity="center"-->
+<!--                            android:text="View All"-->
+<!--                            android:textColor="@color/textcolour_black"-->
+<!--                            android:textSize="14dp"-->
+<!--                            android:textStyle="bold"></TextView>-->
+
+<!--                    </LinearLayout>-->
+
+<!--                </LinearLayout>-->
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <ListView
+                    android:layout_marginBottom="23dp"
+                    android:id="@+id/User_wallet_History"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+                <!--<androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="8dp"
+                    app:cardMaxElevation="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageWallet"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_wallet4">
+
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/ptextWallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_toRightOf="@+id/imageWallet"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Money Added"
+                            android:textColor="@color/textcolour_black"
+                            android:textSize="14sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p1textWallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/ptextWallet"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/imageWallet"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Money Sent: received"
+                            android:textSize="12sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p2textWallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_toRightOf="@+id/p1textWallet"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="  "
+                            android:textColor="#DF00C853"
+                            android:textSize="14sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p3textWallet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/ptextWallet"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/p1textWallet"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="    "
+                            android:textSize="12sp">
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>-->
+                <!--<androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="8dp"
+                    app:cardMaxElevation="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageWallet1"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_wallet4">
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/ptextWallet1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_toRightOf="@+id/imageWallet1"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Call Charge"
+                            android:textColor="@color/textcolour_black"
+                            android:textSize="14sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p1textWallet1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/ptextWallet1"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/imageWallet1"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Money Debited: Success"
+                            android:textSize="12sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p2textWallet1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_toRightOf="@+id/p1textWallet1"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text=" "
+                            android:textColor="#F44336"
+                            android:textSize="14sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p3textWallet1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/ptextWallet1"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/p1textWallet1"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text=" "
+                            android:textSize="12sp">
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:thicknessRatio="1.9"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="8dp"
+                    app:cardMaxElevation="8dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/imageWallet2"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="5dp"
+                            android:padding="10dp"
+                            android:src="@drawable/ic_wallet4">
+                        </ImageView>
+
+                        <TextView
+                            android:id="@+id/ptextWallet2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_toRightOf="@+id/imageWallet2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Transation Faild"
+                            android:textColor="@color/textcolour_black"
+                            android:textSize="14sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p1textWallet2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/ptextWallet2"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/imageWallet2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="Adding Money: failed"
+                            android:textSize="12sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p2textWallet2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_toRightOf="@+id/p1textWallet2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="   "
+                            android:textColor="#FFEB3B"
+                            android:textSize="14sp">
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/p3textWallet2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/ptextWallet2"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_toRightOf="@+id/p1textWallet2"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:text="     "
+                            android:textSize="12sp">
+                        </TextView>
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>-->
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

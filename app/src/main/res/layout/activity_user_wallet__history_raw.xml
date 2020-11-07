@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="10dp"
+        android:thicknessRatio="1.9"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="8dp"
+        app:cardMaxElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageWallet"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="5dp"
+                android:padding="10dp"
+                android:src="@drawable/ic_wallet4">
+
+            </ImageView>
+
+            <TextView
+                android:text="Payment Success"
+                android:id="@+id/User_wallet_Payment_Type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@+id/imageWallet"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/textcolour_black"
+                android:textSize="12sp">
+            </TextView>
+
+            <TextView
+                android:textColor="@color/textcolour_black"
+                android:id="@+id/User_wallet_History_Remark"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/User_wallet_Payment_Type"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_toRightOf="@+id/imageWallet"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="Money Sent: received"
+                android:textSize="10sp">
+            </TextView>
+
+            <TextView
+                android:textStyle="bold"
+                android:id="@+id/User_wallet_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="  "
+                android:textColor="#DF00C853"
+                android:textSize="14sp">
+            </TextView>
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/User_wallet_Payment_Id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/User_wallet_Payment_Type"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="    "
+                android:textSize="12sp">
+            </TextView>
+
+            <TextView
+                android:textColor="@color/black"
+                android:id="@+id/User_wallet_Payment_Date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/User_wallet_Payment_Id"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="10dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="    "
+                android:textSize="12sp">
+            </TextView>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

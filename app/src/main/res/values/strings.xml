@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Astro Consult</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="Astro_profile">Astrologer Profile</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+
+    <string name="home_second">Home Second</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="update">UPDATE</string>
+
+    <string name="forget_password"><u>Forget your Password?</u></string>
+    <string name="Astrologer_Login"><u> Astrologer Login or Signup </u></string>
+    <string name="edit_profile"> <u> Edit Profile </u></string>
+    <string name="resend"><u>Resend Otp</u></string>
+    <string name="verify">verify</string>
+    <string name="we_will_send_you_one_time_password_for_your_mobile_no_verification">We will send you One Time Password for your mobile no. verification</string>
+    <string name="title_activity_astro_home">AstroHome</string>
+    <string name="face_reading_instraction">This astrologer is able to face reading, You are interest for this Just clicked your face Photo and upload it in below. we charge for this service amount of </string>
+    <string name="plam_reading_instraction">This astrologer is able to palm reading, You are interest for this Just clicked your palm Photo and upload it in below. we charge for this service amount of </string>
+
+</resources>

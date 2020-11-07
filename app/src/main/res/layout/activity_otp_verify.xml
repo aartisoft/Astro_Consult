@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="30dp"
+    tools:context=".OtpVerify">
+
+    <!-- <ImageView
+         android:id="@+id/image"
+         android:layout_width="match_parent"
+         android:layout_height="200dp"
+         android:src="@drawable/login">
+     </ImageView>-->
+
+    <TextView
+
+        android:id="@+id/mainOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/bangla_sangamold"
+        android:text="OTP Verification"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/nextOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mainOtp"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="8dp"
+        android:layout_marginTop="25dp"
+        android:fontFamily="@font/bangla_sangamold"
+        android:gravity="center_horizontal|center_vertical"
+        android:justificationMode="inter_word"
+        android:text="@string/we_will_send_you_one_time_password_for_your_mobile_no_verification"
+        android:textColor="@color/colorPrimary"
+        android:textSize="15sp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/verifyOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/nextOtp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="28sp"
+        android:textStyle="bold"></TextView>
+
+    <com.alimuzaffar.lib.pin.PinEntryEditText
+        android:layout_centerInParent="true"
+        android:id="@+id/txt_pin_entry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cursorVisible="false"
+        android:digits="1234567890"
+        android:inputType="number"
+        android:maxLength="6"
+        android:textIsSelectable="false"
+        android:textSize="20sp"
+        app:pinAnimationType="popIn" />
+
+<!--    <com.chaos.view.PinView-->
+<!--        android:id="@+id/pinView"-->
+<!--        style="@style/PinWidget.PinView"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerInParent="true"-->
+<!--        android:layout_marginStart="8dp"-->
+<!--        android:layout_marginTop="0dp"-->
+<!--        android:layout_marginEnd="8dp"-->
+<!--        android:layout_marginBottom="8dp"-->
+<!--        android:inputType="number"-->
+<!--        android:padding="10dp"-->
+<!--        android:textSize="18sp"-->
+<!--        app:itemCount="4"-->
+<!--        app:itemHeight="48dp"-->
+<!--        app:itemRadius="10dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:lineColor="@color/colorPrimary"-->
+<!--        app:viewType="rectangle" />-->
+
+    <Button
+        android:id="@+id/otpButton"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_below="@id/txt_pin_entry"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/custtom_button"
+        android:fontFamily="@font/bangla_sangamold"
+        android:text="@string/verify"
+        android:textColor="#fff"
+        android:textSize="15sp"
+        android:textStyle="bold">
+    </Button>
+
+    <TextView
+        android:visibility="gone"
+        android:id="@+id/resendOtp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/otpButton"
+        android:fontFamily="@font/bangla_sangamold"
+        android:gravity="center"
+        android:text="@string/resend"
+        android:textColor="@color/textcolour"
+        android:textSize="15sp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:textStyle="bold">
+    </TextView>
+
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true">
+    </ProgressBar>
+
+</RelativeLayout>

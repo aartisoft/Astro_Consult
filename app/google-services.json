@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "120361321851",
+    "firebase_url": "https://astroconsult-87457.firebaseio.com",
+    "project_id": "astroconsult-87457",
+    "storage_bucket": "astroconsult-87457.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:120361321851:android:7ab79681228c52f2f329de",
+        "android_client_info": {
+          "package_name": "in.astroconsult.astroconsult"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "120361321851-hueshhd1m0uc1dlgu4dal1qjo7cp8oep.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.astroconsult.astroconsult",
+            "certificate_hash": "783a0deb10d5010fb8bbf3b624f6b4b61d56a853"
+          }
+        },
+        {
+          "client_id": "120361321851-qp110e3l3e66rjs7lckf5afuj4f510nv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "in.astroconsult.astroconsult",
+            "certificate_hash": "211a29dbee2fedd79b78681369fa69dc84e93494"
+          }
+        },
+        {
+          "client_id": "120361321851-9n9oq53pe1tp1n7j1q275k64q84inv1j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCNIktWBw36PxbzR1pfJj4cAFnVe84i4B8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "120361321851-9n9oq53pe1tp1n7j1q275k64q84inv1j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

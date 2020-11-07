@@ -1,0 +1,45 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+    <!-- Customize your theme here. -->
+    <item name="colorPrimary">@color/colorPrimary</item>
+    <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    <item name="colorAccent">@color/colorAccent</item>
+</style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="RateUs" parent="Theme.AppCompat">
+        <item name="colorControlNormal">#70C59797</item>
+        <item name="colorControlActivated">@color/rating_colour</item>
+    </style>
+    <style name="spinnerThemeAboutMeScreen">
+        <item name="android:textSize">12.5sp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+<!--        <item name="android:background">@color/colorPrimary</item>-->
+        <item name="android:singleLine">false</item>
+        <item name="android:backgroundTint">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/montserrat_regular</item>
+    </style>
+
+    <style name="rapple_effect" parent="ButtonTheme">
+        <item name="android:clickable">true</item>
+        <!-- Ripple for API 21 of android, and regular selector on older -->
+        <item name="android:focusable">true</item>
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+    </style>
+
+    <style name="ButtonTheme" parent="Base.Widget.AppCompat.Button">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+</resources>

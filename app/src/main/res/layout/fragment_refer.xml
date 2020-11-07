@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.refer.ReferFragment">
+
+    <!--<ImageView
+        android:id="@+id/referImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="15dp"
+        android:src="@drawable/referand">
+    </ImageView>
+
+    <TextView
+        android:id="@+id/referText"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/referImage"
+        android:layout_margin="10dp"
+        android:text="Share Your Code And Earn"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000"
+        android:textStyle="bold">
+    </TextView>
+
+    <TextView
+        android:id="@+id/referText1"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/referText"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Share Your Refer Code To Your Friends.."
+        android:gravity="center"
+        android:textSize="17dp"
+        android:textColor="#000">
+    </TextView>
+
+    <TextView
+        android:id="@+id/referText2"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_below="@id/referText1"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="Your Reffer Code:982314"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="#000">
+    </TextView>
+
+    <Button
+        android:id="@+id/shareButton"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:background="@drawable/profile"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/referText2"
+        android:layout_marginTop="80dp"
+        android:text="Share and Earn"
+        android:textColor="#fff"
+        android:textSize="20sp"
+        android:textStyle="bold">
+    </Button>-->
+
+</RelativeLayout>

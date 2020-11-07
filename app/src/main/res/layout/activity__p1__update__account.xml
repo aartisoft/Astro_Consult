@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.P1_Update_Account">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="@drawable/profile_back"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="0dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/uploadPhotoEdit"
+                android:layout_width="140dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                app:civ_border_color="#fff"
+                app:civ_border_width="2dp"
+                android:src="@drawable/rinku"
+                android:layout_centerHorizontal="true"
+                android:elevation="3dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_marginTop="100dp"
+                    app:contentPaddingTop="15dp"
+                    app:contentPaddingLeft="15dp"
+                    app:contentPaddingRight="15dp"
+                    app:contentPaddingBottom="15dp"
+                    app:cardCornerRadius="10dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="60dp"
+                        android:orientation="vertical">
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="40dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="7">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Name:"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3">
+
+                                <EditText
+                                    android:fontFamily="@font/bangla_sangamold"
+                                    android:id="@+id/nameEdit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="Full Name"
+                                    android:textSize="15dp"
+                                    android:textColor="@color/colorPrimary"
+                                    android:singleLine="true" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="7">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Phone No:"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3">
+
+                                <EditText
+                                    android:fontFamily="@font/bangla_sangamold"
+                                    android:id="@+id/phoneEdit"
+                                    android:editable="false"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="Phone Number"
+                                    android:textSize="15dp"
+                                    android:inputType="none"
+                                    android:focusable="false"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimary" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="7">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Email Id:"
+                                    android:textSize="17sp"
+                                    android:textColor="#000"
+                                    android:textStyle="bold"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3">
+
+                                <EditText
+                                    android:fontFamily="@font/bangla_sangamold"
+                                    android:id="@+id/addressEdit"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="User Address"
+                                    android:textSize="15dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimary" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="7">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="StartShine:"
+                                    android:textSize="17sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3">
+
+                                <EditText
+                                    android:fontFamily="@font/bangla_sangamold"
+                                    android:id="@+id/spinnerEdit"
+                                    android:editable="false"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="Phone Number"
+                                    android:textSize="15dp"
+                                    android:inputType="none"
+                                    android:focusable="false"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimary" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_marginTop="10dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="7">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="StarShine:"
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:textSize="17sp"
+                                    android:gravity="center"/>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3">
+
+                                <Spinner
+                                    style="@style/spinnerThemeAboutMeScreen"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/starShineSpinner">
+                                </Spinner>
+
+                                <!--<EditText
+                                    android:fontFamily="@font/bangla_sangamold"
+                                    android:id="@+id/startShine"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:hint="starshine"
+                                    android:textSize="15dp"
+                                    android:singleLine="true"
+                                    android:textColor="@color/colorPrimary" />-->
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="35dp"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center_horizontal">
+
+                    <Button
+                        android:id="@+id/updateUser"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="UPDATE"
+                        android:fontFamily="@font/bangla_sangamold"
+                        android:textFontWeight="1000"
+                        android:textSize="15sp"
+                        android:textColor="#fff"
+                        android:background="@drawable/custtom_button"/>
+
+                    <!--<Button
+                        android:id="@+id/logout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LOGOUT"
+                        android:layout_marginLeft="20dp"
+                        android:fontFamily="serif"
+                        android:textFontWeight="1000"
+                        android:textColor="#fff"
+                        android:background="@drawable/update"/>-->
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_below="@+id/uploadPhotoEdit"
+                android:id="@+id/selectImage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="-30dp"
+                android:layout_alignRight="@+id/uploadPhotoEdit"
+                android:background="@drawable/edit_image_icon">
+            </ImageView>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

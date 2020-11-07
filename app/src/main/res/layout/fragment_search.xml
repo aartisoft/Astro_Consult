@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SearchFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="9"
+            android:background="@drawable/details_page_header_background"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/pAvailWallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:gravity="center"
+                    android:text="Wallet Balance"
+                    android:textColor="@color/colourwhite"
+                    android:textSize="15sp"
+                    android:textStyle="bold">
+                </TextView>
+
+                <ImageView
+                    android:layout_toLeftOf="@+id/p1AstroWalletAmount"
+                    android:layout_marginRight="7dp"
+                    android:src="@drawable/rupees_icon_white"
+                    android:id="@+id/icon_rupees"
+                    android:layout_width="37dp"
+                    android:layout_height="33dp"
+                    android:layout_centerVertical="true">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_marginRight="-10dp"
+                    android:layout_marginLeft="3dp"
+                    android:id="@+id/p1AstroWalletAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text=" __.__   "
+                    android:textColor="@color/colourwhite"
+                    android:textSize="40sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/p2AstroLastPayment"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/p1AstroWalletAmount"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center"
+                    android:text="Last Payment: Rs. "
+                    android:textColor="@color/colourwhite"
+                    android:textSize="14sp">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/p3AstroLastPaymentDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/p1AstroWalletAmount"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/p2AstroLastPayment"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:gravity="center|end"
+                    android:text=""
+                    android:textColor="@color/colourwhite"
+                    android:textSize="14sp">
+                </TextView>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <ListView
+                    android:layout_marginBottom="23dp"
+                    android:id="@+id/Astro_wallet_History"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </ListView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+</FrameLayout>
