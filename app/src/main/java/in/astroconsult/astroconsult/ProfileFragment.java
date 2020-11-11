@@ -451,6 +451,7 @@ public class ProfileFragment extends Fragment {
                         if (phone != null && phone.equals(user.get(position).getMobile())) {
                             Intent intent = new Intent(getContext(), ChatActivity.class);
                             intent.putExtra("user_id", s.getKey().toString());
+                            intent.putExtra("astro_mobile", mobileAstrologer);
                             intent.putExtra("user_name", s.hasChild("name") ? s.child("name").toString() : "");
                             startActivity(intent);
                             break;

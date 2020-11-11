@@ -1,6 +1,7 @@
 package in.astroconsult.astroconsult.Chat;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -9,8 +10,6 @@ import android.os.CountDownTimer;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,7 +22,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.chaos.view.PinView;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -42,10 +42,23 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import in.astroconsult.astroconsult.AstroLogIn;
+import in.astroconsult.astroconsult.AstroOtp;
+import in.astroconsult.astroconsult.AstroOtpEditProfile;
+import in.astroconsult.astroconsult.AstroOtpVerify;
+import in.astroconsult.astroconsult.Interface.ApiClient;
 import in.astroconsult.astroconsult.MainActivity;
+import in.astroconsult.astroconsult.Preferance.AstroLogInPreference;
+import in.astroconsult.astroconsult.Preferance.LogInPreference;
 import in.astroconsult.astroconsult.R;
+import in.astroconsult.astroconsult.Response.AstroLogInResponse;
+import in.astroconsult.astroconsult.Response.EndChatResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ChatActivity extends AppCompatActivity {
+    private static final String API_KEY = "w0fp55cIdJ6lLuOqVEd251zKw6lnNd";
     private static final String TAG = "ChatActivity";
     public static final int BILLING_INTERVAL = 60000; //1 minute
     private static int chargableTotalMinutes = 0;
@@ -53,7 +66,7 @@ public class ChatActivity extends AppCompatActivity {
     final int chargableAmountPerMin = 60; //amount to be charged per minute
     Timer billingTimer;
 
-    int counter;
+    int secondsCount;
 
     private Toolbar mChatToolbar;
 
@@ -77,9 +90,13 @@ public class ChatActivity extends AppCompatActivity {
 
     private String mChatUser; //this is opposite party in chat
     private String mUserName;
+    private String astroMobile;
 
-    TextView countDownTv;
+
+    //TextView countDownTv;
     Button endChat;
+    private PinView timerPinView;
+    private Timer chatTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,49 +105,46 @@ public class ChatActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        countDownTv = (TextView) findViewById(R.id.textTimmer);
+        timerPinView = findViewById(R.id.timer_pin_view);
+        //countDownTv = (TextView) findViewById(R.id.textTimmer);
         endChat = (Button) findViewById(R.id.end_chat);
 
-        new CountDownTimer(5000000,1000) {
+        chatTimer = new Timer();
+        chatTimer.schedule(new TimerTask() {
             @Override
-            public void onTick(long millisUntilFinished) {
-                countDownTv.setText("Your Chat Begin: "+String.valueOf(counter));
-                counter++;
+            public void run() {
+                secondsCount++;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        // long seconds = (int)((secondsCount / 1000) % 60);
+                        timerPinView.setText(String.format("%02d:%02d:%02d", secondsCount / 3600,
+                                (secondsCount % 3600) / 60, (secondsCount % 60)));
+                    }
+                });
+
             }
-            @Override
-            public void onFinish() {
-                //countDownTv.setText("Finished");
-            }
-        }.start();
+
+        }, 0, 1000);
 
         endChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(ChatActivity.this);
-                builder.setTitle("Start Chat");
-                builder.setMessage("Are You Sure You Want to Terminate Chat");
-                builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(ChatActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
+                showEndChatAlert();
 
-                AlertDialog dialog = builder.create();
-                dialog.show();
             }
         });
 
-        mChatUser = getIntent().getStringExtra("user_id");
-        mUserName = getIntent().getStringExtra("user_name");
+        Intent intent = getIntent();
+        if(intent.hasExtra("user_id")){
+            mChatUser = getIntent().getStringExtra("user_id");
+        }
+        if(intent.hasExtra("user_name")){
+            mUserName = getIntent().getStringExtra("user_name");
+        }
+        if(intent.hasExtra("astro_mobile")){
+            astroMobile = getIntent().getStringExtra("astro_mobile");
+        }
 
         mAuth = FirebaseAuth.getInstance();
         mRootRef = FirebaseDatabase.getInstance().getReference();
@@ -183,8 +197,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void setCustomActionBar() {
-        mChatToolbar = findViewById(R.id.chat_app_bar);
-        setSupportActionBar(mChatToolbar);
+        //mChatToolbar = findViewById(R.id.chat_app_bar);
+        //setSupportActionBar(mChatToolbar);
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -373,5 +387,65 @@ public class ChatActivity extends AppCompatActivity {
 
     private void setCurrentUserOnline(Object online) {
         mRootRef.child("Users").child(mCurrentUserId).child("online").setValue(online);
+    }
+
+    @Override
+    public void onBackPressed() {
+         showEndChatAlert();
+    }
+
+    private void showEndChatAlert() {
+        new AlertDialog.Builder(this)
+                .setTitle("End Chat!")
+                .setMessage("Are You Sure You Want To Terminate Chat?")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //sendChatSummary();
+                        ChatActivity.super.onBackPressed();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    private void sendChatSummary() {
+        final ProgressDialog dialog = new ProgressDialog(this);
+        dialog.setCancelable(false);
+        dialog.show();
+        dialog.setMessage("Please Wait...");
+
+        String userMobile = LogInPreference.getInstance(this).getMobileNo();
+        String duration = timerPinView.getText().toString();
+        String timestamp = "";
+        Call<EndChatResponse> call = ApiClient.getCliet().endChat(API_KEY,astroMobile, userMobile, timestamp,duration);
+        call.enqueue(new Callback<EndChatResponse>() {
+            @Override
+            public void onResponse(Call<EndChatResponse> call, Response<EndChatResponse> response) {
+                dialog.dismiss();
+                if(response.isSuccessful()){
+                    EndChatResponse endChatResponse = response.body();
+                    //TODO :- Add code below according to API response handling
+//                    if(endChatResponse.getSuccess == true){
+//                        ChatActivity.super.onBackPressed();
+//                    }
+                }else {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EndChatResponse> call, Throwable throwable) {
+                dialog.dismiss();
+                Log.d(TAG, "Something went wrong in Chat");
+                //Snackbar.make(mobile, "Something went wrong!! Try again..", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+
     }
 }

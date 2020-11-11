@@ -9,6 +9,7 @@ import in.astroconsult.astroconsult.Response.AstroSignUpResponse;
 import in.astroconsult.astroconsult.Response.AstrologerWalletBalanceResponse;
 import in.astroconsult.astroconsult.Response.BlogResponse;
 import in.astroconsult.astroconsult.Response.EditProfileResponse;
+import in.astroconsult.astroconsult.Response.EndChatResponse;
 import in.astroconsult.astroconsult.Response.GetAstrologerResponse;
 import in.astroconsult.astroconsult.Response.HomeAstroResponse;
 import in.astroconsult.astroconsult.Response.LanguageResponse;
@@ -209,5 +210,12 @@ public interface APIInterface {
     Call<AstrologerWalletBalanceResponse> walletBalanceAstro(@Query("api_key") String api,
                                                         @Query("mobile") String mobile);
 
+    @FormUrlEncoded
+    @POST("addChat")
+    Call<EndChatResponse> endChat(@Query("api_key") String key,
+                                  @Field("astromobile") String astroMobile,
+                                  @Field("usermobile") String userMobile,
+                                  @Field("date") String date,
+                                  @Field("duration") String duration);
 
 }
