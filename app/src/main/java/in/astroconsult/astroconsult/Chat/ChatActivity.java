@@ -34,10 +34,14 @@ import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -136,13 +140,13 @@ public class ChatActivity extends AppCompatActivity {
         });
 
         Intent intent = getIntent();
-        if(intent.hasExtra("user_id")){
+        if (intent.hasExtra("user_id")) {
             mChatUser = getIntent().getStringExtra("user_id");
         }
-        if(intent.hasExtra("user_name")){
+        if (intent.hasExtra("user_name")) {
             mUserName = getIntent().getStringExtra("user_name");
         }
-        if(intent.hasExtra("astro_mobile")){
+        if (intent.hasExtra("astro_mobile")) {
             astroMobile = getIntent().getStringExtra("astro_mobile");
         }
 
@@ -175,16 +179,13 @@ public class ChatActivity extends AppCompatActivity {
 //                Picasso.with(ChatActivity.this).load(image)
 //                        .placeholder(R.drawable.default_avatar).into(mProfileImage);
 
-               // mLastSeenView.setVisibility(View.VISIBLE);
-                if(online.equals("true"))
-                {
-                   // mLastSeenView.setText("Online");
-                }
-                else
-                {
+                // mLastSeenView.setVisibility(View.VISIBLE);
+                if (online.equals("true")) {
+                    // mLastSeenView.setText("Online");
+                } else {
                     GetTimeAgo getTimeAgo = new GetTimeAgo();
                     Long lastTime = Long.parseLong(online);
-                    String lastSeentTime = getTimeAgo.getTimeAgo(lastTime,getApplicationContext());
+                    String lastSeentTime = getTimeAgo.getTimeAgo(lastTime, getApplicationContext());
                     //mLastSeenView.setText("" + lastSeentTime);
                 }
             }
@@ -244,7 +245,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void run() {
                 chargableTotalMinutes++;
-                if(walletAmount < (chargableTotalMinutes * chargableAmountPerMin)){
+                if (walletAmount < (chargableTotalMinutes * chargableAmountPerMin)) {
                     //show alert to abort the chat or continue the chat with wallet recharge
                     //billingTimer.cancel();
                     runOnUiThread(new Runnable() {
@@ -269,7 +270,7 @@ public class ChatActivity extends AppCompatActivity {
                     });
                 }
             }
-        },0,BILLING_INTERVAL);
+        }, 0, BILLING_INTERVAL);
     }
 
     @Override
@@ -341,7 +342,7 @@ public class ChatActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
                     if (databaseError != null) {
-                        Log.d(TAG, "Firebase Err : "  +databaseError.getMessage());
+                        Log.d(TAG, "Firebase Err : " + databaseError.getMessage());
                     } else if (databaseError == null) {
                         Log.d(TAG, "Firebase Success while writting messages");
                     }
@@ -387,11 +388,14 @@ public class ChatActivity extends AppCompatActivity {
 
     private void setCurrentUserOnline(Object online) {
         mRootRef.child("Users").child(mCurrentUserId).child("online").setValue(online);
+
+
     }
+
 
     @Override
     public void onBackPressed() {
-         showEndChatAlert();
+        showEndChatAlert();
     }
 
     private void showEndChatAlert() {
@@ -401,8 +405,13 @@ public class ChatActivity extends AppCompatActivity {
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //sendChatSummary();
-                        ChatActivity.super.onBackPressed();
+                        if (LogInPreference.getInstance(ChatActivity.this).getUser() != null) {
+                            //I'm user, so sending summary before going back to profileFragment
+                            sendChatSummary();
+                        } else {
+                            //I'm astrologer, so going back to conversationActivity
+                            ChatActivity.super.onBackPressed();
+                        }
                     }
                 })
                 .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
@@ -422,30 +431,37 @@ public class ChatActivity extends AppCompatActivity {
 
         String userMobile = LogInPreference.getInstance(this).getMobileNo();
         String duration = timerPinView.getText().toString();
-        String timestamp = "";
-        Call<EndChatResponse> call = ApiClient.getCliet().endChat(API_KEY,astroMobile, userMobile, timestamp,duration);
+        String timestamp = getCurrentIsoDateTime();
+        Call<EndChatResponse> call = ApiClient.getCliet().endChat(API_KEY, astroMobile, userMobile, timestamp, duration);
         call.enqueue(new Callback<EndChatResponse>() {
             @Override
             public void onResponse(Call<EndChatResponse> call, Response<EndChatResponse> response) {
                 dialog.dismiss();
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     EndChatResponse endChatResponse = response.body();
                     //TODO :- Add code below according to API response handling
-//                    if(endChatResponse.getSuccess == true){
-//                        ChatActivity.super.onBackPressed();
-//                    }
-                }else {
-
+                    Snackbar.make(mChatSendBtn, endChatResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    ChatActivity.super.onBackPressed();
+                } else {
+                    Snackbar.make(mChatSendBtn, "Something went wrong, try again", Snackbar.LENGTH_SHORT).show();
+                    //ChatActivity.super.onBackPressed();
                 }
             }
 
             @Override
             public void onFailure(Call<EndChatResponse> call, Throwable throwable) {
                 dialog.dismiss();
-                Log.d(TAG, "Something went wrong in Chat");
-                //Snackbar.make(mobile, "Something went wrong!! Try again..", Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(mChatSendBtn, "" + throwable.getMessage(), Snackbar.LENGTH_SHORT).show();
             }
         });
 
+    }
+
+    public String getCurrentIsoDateTime() {
+        TimeZone tz = TimeZone.getTimeZone("UTC");
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
+        df.setTimeZone(tz);
+        String nowAsISO = df.format(new Date());
+        return nowAsISO;
     }
 }
