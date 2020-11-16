@@ -14,11 +14,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -57,6 +59,7 @@ import in.astroconsult.astroconsult.Preferance.LogInPreference;
 import in.astroconsult.astroconsult.R;
 import in.astroconsult.astroconsult.Response.AstroLogInResponse;
 import in.astroconsult.astroconsult.Response.EndChatResponse;
+import in.astroconsult.astroconsult.ui.Wallet;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -70,7 +73,7 @@ public class ChatActivity extends AppCompatActivity {
     final int chargableAmountPerMin = 60; //amount to be charged per minute
     Timer billingTimer;
 
-    int secondsCount;
+    int secondsCount, minutesCount, maxMinutesToChat;
 
     private Toolbar mChatToolbar;
 
@@ -94,7 +97,7 @@ public class ChatActivity extends AppCompatActivity {
 
     private String mChatUser; //this is opposite party in chat
     private String mUserName;
-    private String astroMobile;
+    private String astroMobile ;
 
 
     //TextView countDownTv;
@@ -112,6 +115,23 @@ public class ChatActivity extends AppCompatActivity {
         timerPinView = findViewById(R.id.timer_pin_view);
         //countDownTv = (TextView) findViewById(R.id.textTimmer);
         endChat = (Button) findViewById(R.id.end_chat);
+        Intent intent = getIntent();
+        if (intent.hasExtra("user_id")) {
+            mChatUser = getIntent().getStringExtra("user_id");
+        }
+        if (intent.hasExtra("user_name")) {
+            mUserName = getIntent().getStringExtra("user_name");
+        }
+        if (intent.hasExtra("astro_mobile")) {
+            astroMobile = getIntent().getStringExtra("astro_mobile");
+        }
+        if (intent.hasExtra("maxMinutesToChat")) {
+            maxMinutesToChat = getIntent().getIntExtra("maxMinutesToChat", 0);
+        }
+
+        mAuth = FirebaseAuth.getInstance();
+        mRootRef = FirebaseDatabase.getInstance().getReference();
+        mRootRef.keepSynced(true);
 
         chatTimer = new Timer();
         chatTimer.schedule(new TimerTask() {
@@ -127,6 +147,9 @@ public class ChatActivity extends AppCompatActivity {
                     }
                 });
 
+                if((secondsCount % 60) > maxMinutesToChat){
+                    showRefillAmmount();
+                }
             }
 
         }, 0, 1000);
@@ -138,21 +161,6 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
-
-        Intent intent = getIntent();
-        if (intent.hasExtra("user_id")) {
-            mChatUser = getIntent().getStringExtra("user_id");
-        }
-        if (intent.hasExtra("user_name")) {
-            mUserName = getIntent().getStringExtra("user_name");
-        }
-        if (intent.hasExtra("astro_mobile")) {
-            astroMobile = getIntent().getStringExtra("astro_mobile");
-        }
-
-        mAuth = FirebaseAuth.getInstance();
-        mRootRef = FirebaseDatabase.getInstance().getReference();
-        mRootRef.keepSynced(true);
 
         if (mAuth.getCurrentUser() != null) {
             mCurrentUserId = mAuth.getCurrentUser().getUid();
@@ -315,6 +323,8 @@ public class ChatActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         setCurrentUserOnline(ServerValue.TIMESTAMP);
+
+        sendChatSummary();
     }
 
     private void sendMessage() {
@@ -380,18 +390,17 @@ public class ChatActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
+            public void onCancelled(DatabaseError databaseError)
+            {
 
             }
         });
     }
 
-    private void setCurrentUserOnline(Object online) {
+    private void setCurrentUserOnline(Object online)
+    {
         mRootRef.child("Users").child(mCurrentUserId).child("online").setValue(online);
-
-
     }
-
 
     @Override
     public void onBackPressed() {
@@ -404,12 +413,18 @@ public class ChatActivity extends AppCompatActivity {
                 .setMessage("Are You Sure You Want To Terminate Chat?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (LogInPreference.getInstance(ChatActivity.this).getUser() != null) {
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        if (LogInPreference.getInstance(ChatActivity.this).getUser()=="IsUser") {
                             //I'm user, so sending summary before going back to profileFragment
                             sendChatSummary();
-                        } else {
+                        }
+                        else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() == "IsAstrologer")
+                        {
                             //I'm astrologer, so going back to conversationActivity
+                        }
+                        else
+                        {
                             ChatActivity.super.onBackPressed();
                         }
                     }
@@ -418,6 +433,21 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                    }
+                })
+                .show();
+    }
+
+    public void showRefillAmmount(){
+        new AlertDialog.Builder(this)
+                .setTitle("Attention !")
+                .setMessage("Your wallet got empty, Recharge your wallet")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        finish();
+                        sendChatSummary();
                     }
                 })
                 .show();

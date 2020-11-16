@@ -272,7 +272,7 @@ public class ProfileFragment extends Fragment {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setTitle("Start Chat");
-                    builder.setMessage("Rupees " + walletUserAmount1 + " For Start Chat");
+                    builder.setMessage("You will be charged Rs." + walletUserAmount1 + " per minute. Do you want to Continue?");
                     builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -449,9 +449,14 @@ public class ProfileFragment extends Fragment {
                     for (DataSnapshot s : snapshot.getChildren()) {
                         String phone = s.hasChild("phone") ? s.child("phone").getValue().toString() : null;
                         if (phone != null && phone.equals(user.get(position).getMobile())) {
+
+
                             Intent intent = new Intent(getContext(), ChatActivity.class);
                             intent.putExtra("user_id", s.getKey().toString());
                             intent.putExtra("astro_mobile", mobileAstrologer);
+                            if(getMaxMinutesToChat()!=0){
+                                intent.putExtra("maxMinutesToChat", getMaxMinutesToChat());
+                            }
                             intent.putExtra("user_name", s.hasChild("name") ? s.child("name").toString() : "");
                             startActivity(intent);
                             break;
@@ -467,6 +472,16 @@ public class ProfileFragment extends Fragment {
 
             }
         });
+    }
+
+    private Integer getMaxMinutesToChat() {
+        String perMinCharge = user.get(position).getCcharge();
+        if(walletAmount != null && perMinCharge != null && Integer.parseInt(perMinCharge)!=0)
+        {
+            return Integer.parseInt(walletAmount)/Integer.parseInt(perMinCharge);
+        }else {
+            return 0;
+        }
     }
 
     public void amount() {
