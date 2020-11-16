@@ -144,14 +144,15 @@ public class ChatActivity extends AppCompatActivity {
                         // long seconds = (int)((secondsCount / 1000) % 60);
                         timerPinView.setText(String.format("%02d:%02d:%02d", secondsCount / 3600,
                                 (secondsCount % 3600) / 60, (secondsCount % 60)));
+
+                        if(((secondsCount % 3600) / 60) >= maxMinutesToChat){
+                            showRefillAmmount();
+                            chatTimer.cancel();
+                            Log.d("patchsharma", "ayaaaa");
+                        }
                     }
                 });
-
-                if((secondsCount % 60) > maxMinutesToChat){
-                    showRefillAmmount();
-                }
             }
-
         }, 0, 1000);
 
         endChat.setOnClickListener(new View.OnClickListener() {
@@ -323,8 +324,7 @@ public class ChatActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         setCurrentUserOnline(ServerValue.TIMESTAMP);
-
-        sendChatSummary();
+        sendChatSummary(false);
     }
 
     private void sendMessage() {
@@ -417,7 +417,7 @@ public class ChatActivity extends AppCompatActivity {
                     {
                         if (LogInPreference.getInstance(ChatActivity.this).getUser()=="IsUser") {
                             //I'm user, so sending summary before going back to profileFragment
-                            sendChatSummary();
+                            sendChatSummary(true);
                         }
                         else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() == "IsAstrologer")
                         {
@@ -425,7 +425,8 @@ public class ChatActivity extends AppCompatActivity {
                         }
                         else
                         {
-                            ChatActivity.super.onBackPressed();
+                            //ChatActivity.super.onBackPressed();
+                            finish();
                         }
                     }
                 })
@@ -441,24 +442,25 @@ public class ChatActivity extends AppCompatActivity {
     public void showRefillAmmount(){
         new AlertDialog.Builder(this)
                 .setTitle("Attention !")
-                .setMessage("Your wallet got empty, Recharge your wallet")
+                .setMessage("Your wallet has not sufficient amount to continue the chat, Recharge your wallet")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
                         finish();
-                        sendChatSummary();
+                        sendChatSummary(false);
                     }
                 })
                 .show();
     }
 
-    private void sendChatSummary() {
+    private void sendChatSummary(final Boolean isProgressShown) {
         final ProgressDialog dialog = new ProgressDialog(this);
-        dialog.setCancelable(false);
-        dialog.show();
-        dialog.setMessage("Please Wait...");
-
+        if(isProgressShown){
+            dialog.setCancelable(false);
+            dialog.show();
+            dialog.setMessage("Please Wait...");
+        }
         String userMobile = LogInPreference.getInstance(this).getMobileNo();
         String duration = timerPinView.getText().toString();
         String timestamp = getCurrentIsoDateTime();
@@ -466,12 +468,13 @@ public class ChatActivity extends AppCompatActivity {
         call.enqueue(new Callback<EndChatResponse>() {
             @Override
             public void onResponse(Call<EndChatResponse> call, Response<EndChatResponse> response) {
-                dialog.dismiss();
+                if(isProgressShown)
+                    dialog.dismiss();
                 if (response.isSuccessful()) {
                     EndChatResponse endChatResponse = response.body();
                     //TODO :- Add code below according to API response handling
                     Snackbar.make(mChatSendBtn, endChatResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
-                    ChatActivity.super.onBackPressed();
+                    finish();
                 } else {
                     Snackbar.make(mChatSendBtn, "Something went wrong, try again", Snackbar.LENGTH_SHORT).show();
                     //ChatActivity.super.onBackPressed();

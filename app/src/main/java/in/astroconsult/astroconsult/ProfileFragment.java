@@ -474,11 +474,11 @@ public class ProfileFragment extends Fragment {
         });
     }
 
-    private Integer getMaxMinutesToChat() {
-        String perMinCharge = user.get(position).getCcharge();
-        if(walletAmount != null && perMinCharge != null && Integer.parseInt(perMinCharge)!=0)
+    private int getMaxMinutesToChat() {
+        Float perMinCharge = Float.valueOf(user.get(position).getCcharge());
+        if(walletAmount != null && perMinCharge != null && perMinCharge!=0)
         {
-            return Integer.parseInt(walletAmount)/Integer.parseInt(perMinCharge);
+            return ((int)(Float.parseFloat(walletAmount)/perMinCharge));
         }else {
             return 0;
         }
