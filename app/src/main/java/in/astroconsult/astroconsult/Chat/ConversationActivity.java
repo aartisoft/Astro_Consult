@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import com.squareup.picasso.Picasso;
@@ -127,26 +129,35 @@ public class ConversationActivity extends AppCompatActivity {
                         if (dataSnapshot.hasChild("name"))
                         {
                             final String userName =  dataSnapshot.child("name").getValue().toString();
+                            final String online =  dataSnapshot.hasChild("online") ? dataSnapshot.child("online").getValue().toString() : "";
+
                             ChatViewHolder.setUserName(userName);
                             if(message_type.equals("text"))
                             {
                                 ChatViewHolder.userLastPhotoMsg.setVisibility(View.GONE);
                                 ChatViewHolder.setLastMsg(lastMsg);
                             }
+
 //                        else if (message_type.equals("image"))
 //                        {
 //                            ChatViewHolder.userLastPhotoMsg.setVisibility(View.VISIBLE);
 //                            ChatViewHolder.setLastMsg("photo");
 //                        }
                             //ChatViewHolder.setUserImage(userThumb);
+
                             ChatViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view)
                                 {
-                                    Intent chatIntent = new Intent(ConversationActivity.this,ChatActivity.class);
-                                    chatIntent.putExtra("user_id",mChatUserId);
-                                    chatIntent.putExtra("user_name",userName);
-                                    startActivity(chatIntent);
+                                    if(online.equals("true")) {
+                                        Intent chatIntent = new Intent(ConversationActivity.this,ChatActivity.class);
+                                        chatIntent.putExtra("user_id",mChatUserId);
+                                        chatIntent.putExtra("user_name",userName);
+                                        startActivity(chatIntent);
+                                    }else {
+                                        Snackbar.make(mchatUsersList,
+                                                "User is not active, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                                    }
                                 }
                             });
                         }
@@ -165,7 +176,7 @@ public class ConversationActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        FirebaseAuthUtil.setCurrentUserOnline(false);
+        FirebaseAuthUtil.setCurrentUserOnline(ServerValue.TIMESTAMP);
 
     }
 

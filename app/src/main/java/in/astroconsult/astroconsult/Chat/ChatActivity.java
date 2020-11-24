@@ -147,9 +147,9 @@ public class ChatActivity extends AppCompatActivity {
                         timerPinView.setText(String.format("%02d:%02d:%02d", secondsCount / 3600,
                                 (secondsCount % 3600) / 60, (secondsCount % 60)));
 
-                        if(AstroLogInPreference.getInstance(ChatActivity.this).getAstro() !=null &&
-                                !AstroLogInPreference.getInstance(ChatActivity.this).getAstro().equals("IsAstrologer")){
-                            if(((secondsCount % 3600) / 60) >= maxMinutesToChat){
+                        if(LogInPreference.getInstance(ChatActivity.this).getUser()!=null &&
+                                LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
+                            if((secondsCount / 60) >= maxMinutesToChat){
                                 showRefillAmmount();
                                 chatTimer.cancel();
                                 Log.d("patchsharma", "ayaaaa");
@@ -218,11 +218,11 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which)
                         {
-                            if (LogInPreference.getInstance(ChatActivity.this).getUser()=="IsUser") {
+                            if (LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
                                 //I'm user, so sending summary before going back to profileFragment
                                 sendChatSummary(true);
                             }
-                            else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() == "IsAstrologer")
+                            else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro().equals("IsAstrologer"))
                             {
                                 //I'm astrologer, so going back to conversationActivity
                                 finish();
@@ -360,13 +360,19 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        setCurrentUserOnline(ServerValue.TIMESTAMP);
+        if(LogInPreference.getInstance(ChatActivity.this).getUser()!=null &&
+                LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")){
+            setCurrentUserOnline(ServerValue.TIMESTAMP);
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        setCurrentUserOnline(ServerValue.TIMESTAMP);
+        if(LogInPreference.getInstance(ChatActivity.this).getUser()!=null &&
+                LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")){
+            setCurrentUserOnline(ServerValue.TIMESTAMP);
+        }
     }
 
    /* @Override
@@ -390,8 +396,10 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        setCurrentUserOnline(ServerValue.TIMESTAMP);
-        sendChatSummary(false);
+        if(LogInPreference.getInstance(ChatActivity.this).getUser()!=null &&
+                LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")){
+            setCurrentUserOnline(ServerValue.TIMESTAMP);
+        }      //  sendChatSummary(false);
     }
 
     private void sendMessage() {
@@ -482,11 +490,11 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        if (LogInPreference.getInstance(ChatActivity.this).getUser()=="IsUser") {
+                        if (LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
                             //I'm user, so sending summary before going back to profileFragment
                             sendChatSummary(true);
                         }
-                        else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() == "IsAstrologer")
+                        else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() .equals("IsAstrologer"))
                         {
                             //I'm astrologer, so going back to conversationActivity
                             finish();
@@ -548,9 +556,10 @@ public class ChatActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     EndChatResponse endChatResponse = response.body();
                     //TODO :- Add code below according to API response handling
-                    Snackbar.make(mChatSendBtn, endChatResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                    //Snackbar.make(mChatSendBtn, endChatResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
                     finish();
-                } else {
+                }
+                else {
                     Snackbar.make(mChatSendBtn, "Something went wrong, try again", Snackbar.LENGTH_SHORT).show();
                     //ChatActivity.super.onBackPressed();
                 }
@@ -558,8 +567,10 @@ public class ChatActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<EndChatResponse> call, Throwable throwable) {
-                dialog.dismiss();
-                Snackbar.make(mChatSendBtn, "" + throwable.getMessage(), Snackbar.LENGTH_SHORT).show();
+                if(isProgressShown){
+                    dialog.dismiss();
+                    Snackbar.make(mChatSendBtn, "" + throwable.getMessage(), Snackbar.LENGTH_SHORT).show();
+                }
             }
         });
 

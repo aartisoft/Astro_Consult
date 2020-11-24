@@ -453,7 +453,7 @@ public class ProfileFragment extends Fragment {
                             isAstroExistInFirebase = true;
                             String online =  s.hasChild("online") ? s.child("online").getValue().toString() : "";
 
-                            if(true){
+                            if(online.equals("true")){
                                 Intent intent = new Intent(getContext(), ChatActivity.class);
                                 intent.putExtra("user_id", s.getKey().toString());
                                 intent.putExtra("astro_mobile", mobileAstrologer);
@@ -465,11 +465,13 @@ public class ProfileFragment extends Fragment {
                             }else {
                                 Snackbar.make(locationName, "Astrologer not active now, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                             }
+                            break;
                         }
                     }
                     if(!isAstroExistInFirebase){
                         Snackbar.make(locationName, "There is something wrong with Astrologer!", Snackbar.LENGTH_SHORT).show();
                     }
+
                 }
             }
 
