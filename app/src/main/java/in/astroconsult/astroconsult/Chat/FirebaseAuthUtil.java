@@ -34,7 +34,7 @@ public class FirebaseAuthUtil {
     private static DatabaseReference mDatabaseRef;
     String nameAstro;
     String api_key = "w0fp55cIdJ6lLuOqVEd251zKw6lnNd";
-    String mobileUser,mobileAstro;
+    String mobileAS;
 
     private FirebaseAuthUtil(){
     }
@@ -59,6 +59,8 @@ public class FirebaseAuthUtil {
         userMap.put("name", displayName);
         userMap.put("online","true");
         userMap.put("phone",displayMobile);
+
+
 //                    userMap.put("image", "default");
 //                    userMap.put("thumb_img", "default");
 
@@ -81,6 +83,7 @@ public class FirebaseAuthUtil {
             }
         });
     }
+
     public void getUser(final Context context, final String uid)
     {
         String mobileUser = LogInPreference.getMobileNo();
@@ -102,18 +105,19 @@ public class FirebaseAuthUtil {
 
     public void getAstro(final Context context, final String uid)
     {
-        Call<HomeAstroResponse> call = ApiClient.getCliet().specialityHome(api_key);
-        call.enqueue(new Callback<HomeAstroResponse>() {
+        mobileAS = AstroLogInPreference.getInstance(context).getAstroMobile();
+        Call<ResponseModel> call = ApiClient.getCliet().astroProfile(api_key,mobileAS);
+        call.enqueue(new Callback<ResponseModel>() {
             @Override
-            public void onResponse(Call<HomeAstroResponse> call, Response<HomeAstroResponse> response) {
+            public void onResponse(Call<ResponseModel> call, Response<ResponseModel> response) {
                 if (response.isSuccessful())
                 {
                     //assert response.body() != null;
-                    registerUser(context, response.body().getAstrologers().get(0).getName(), uid,response.body().getAstrologers().get(0).getMobile());
+                    registerUser(context, response.body().getName(), uid,response.body().getMobile());
                 }
             }
             @Override
-            public void onFailure(Call<HomeAstroResponse> call, Throwable throwable) {
+            public void onFailure(Call<ResponseModel> call, Throwable throwable) {
             }
         });
     }

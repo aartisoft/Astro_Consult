@@ -446,10 +446,11 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.hasChildren()) {
+                    Boolean isAstroExistInFirebase= false;
                     for (DataSnapshot s : snapshot.getChildren()) {
                         String phone = s.hasChild("phone") ? s.child("phone").getValue().toString() : null;
                         if (phone != null && phone.equals(user.get(position).getMobile())) {
-
+                            isAstroExistInFirebase = true;
                             String online =  s.hasChild("online") ? s.child("online").getValue().toString() : "";
 
                             if(true){
@@ -464,11 +465,10 @@ public class ProfileFragment extends Fragment {
                             }else {
                                 Snackbar.make(locationName, "Astrologer not active now, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                             }
-                            break;
-                        } else {
-                            Snackbar.make(locationName, "There is something wrong with Astrologer!", Snackbar.LENGTH_SHORT).show();
-                            //Snackbar.make(locationName, "Astrologer not active now, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                         }
+                    }
+                    if(!isAstroExistInFirebase){
+                        Snackbar.make(locationName, "There is something wrong with Astrologer!", Snackbar.LENGTH_SHORT).show();
                     }
                 }
             }
