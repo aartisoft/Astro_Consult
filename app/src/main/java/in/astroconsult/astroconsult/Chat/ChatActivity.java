@@ -187,12 +187,16 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef.child("Users").child(mChatUser).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("online").getValue() instanceof String){
-                    String online = dataSnapshot.child("online").getValue().toString();
-                    String name = dataSnapshot.child("name").getValue().toString();
-                    if (online.equals("false")) {
-                        endChatDueToOfflinePresence(name);
-                    }
+                if(dataSnapshot.child("online").getValue() instanceof Long){
+                    //String online = dataSnapshot.child("online").getValue().toString();
+                    final String name = dataSnapshot.child("name").getValue().toString();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            endChatDueToOfflinePresence(name);
+                        }
+                    });
                 }
             }
 
@@ -205,37 +209,40 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void endChatDueToOfflinePresence(String receiverName) {
-        new AlertDialog.Builder(this)
-                .setCancelable(false)
-                .setTitle(receiverName + "got offline!")
-                .setMessage("We're terminating chat for now, please try again later.")
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which)
-                    {
-                        if (LogInPreference.getInstance(ChatActivity.this).getUser()=="IsUser") {
-                            //I'm user, so sending summary before going back to profileFragment
-                            sendChatSummary(true);
-                        }
-                        else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() == "IsAstrologer")
+        if (!ChatActivity.this.isFinishing()) {
+            new AlertDialog.Builder(ChatActivity.this)
+                    .setCancelable(false)
+                    .setTitle(receiverName + " got offline!")
+                    .setMessage("We're terminating chat for now, please try again later.")
+                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which)
                         {
-                            //I'm astrologer, so going back to conversationActivity
-                            finish();
+                            if (LogInPreference.getInstance(ChatActivity.this).getUser()=="IsUser") {
+                                //I'm user, so sending summary before going back to profileFragment
+                                sendChatSummary(true);
+                            }
+                            else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() == "IsAstrologer")
+                            {
+                                //I'm astrologer, so going back to conversationActivity
+                                finish();
+                            }
+                            else
+                            {
+                                //ChatActivity.super.onBackPressed();
+                                finish();
+                            }
                         }
-                        else
-                        {
-                            //ChatActivity.super.onBackPressed();
-                            finish();
-                        }
-                    }
-                })
-                .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+                    })
+//                    .setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+//                        @Override
+//                        public void onClick(DialogInterface dialog, int which) {
+//                            dialog.dismiss();
+//                        }
+//                    })
+                    .show();
+        }
+
     }
 
     private void populateCustomActionBar() {

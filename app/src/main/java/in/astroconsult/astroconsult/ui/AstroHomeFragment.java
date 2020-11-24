@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import in.astroconsult.astroconsult.Chat.FirebaseAuthUtil;
 import in.astroconsult.astroconsult.Interface.ApiClient;
 import in.astroconsult.astroconsult.Preferance.AstroLogInPreference;
 import in.astroconsult.astroconsult.R;
@@ -30,6 +31,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
 public class AstroHomeFragment extends Fragment {
@@ -39,6 +44,8 @@ public class AstroHomeFragment extends Fragment {
     RelativeLayout relative1,relative2,relative3;
     ImageView astrologerImage;
     TextView astrologerName,astrologerSpeciality,walletAmountAstroHome;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mDatabaseRef;
 
     public AstroHomeFragment() {
         // Required empty public constructor
@@ -50,6 +57,11 @@ public class AstroHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_astro_home, container, false);
 
+        mAuth = FirebaseAuth.getInstance();
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Users");
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        String currentUserId = currentUser.getUid();
+        FirebaseAuthUtil.getInstance(mAuth,mDatabaseRef).getAstro(getContext(),currentUserId);
 
         mobileHome = AstroLogInPreference.getAstroMobile();
 
