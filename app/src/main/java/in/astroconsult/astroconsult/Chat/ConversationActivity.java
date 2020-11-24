@@ -163,8 +163,16 @@ public class ConversationActivity extends AppCompatActivity {
 
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseAuthUtil.setCurrentUserOnline(false);
+
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
+        FirebaseAuthUtil.setCurrentUserOnline(true);
     }
 
     public static class ChatViewHolder extends RecyclerView.ViewHolder

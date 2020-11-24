@@ -20,6 +20,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -78,14 +80,18 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MessageViewHOl
 
         //geting time from timeStamp value
         final String message_time = DateUtils.formatDateTime(messageHolder.mView.getContext(), message_timeStamp, DateUtils.FORMAT_SHOW_TIME);
+        final String dateString = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").
+                format(new java.util.Date(message_timeStamp * 1000));
 
+        final SimpleDateFormat sfd = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        final String timedate = sfd.format(new Date(message_timeStamp));
         mUserDatabase.child(from_user).addValueEventListener(new ValueEventListener()
         {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 //String name = dataSnapshot.child("name").getValue().toString();
                 //messageHolder.displayName.setText(name);
-                messageHolder.messageTime.setText(message_time);
+                messageHolder.messageTime.setText(timedate);
             }
 
             @Override

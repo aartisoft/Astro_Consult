@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import in.astroconsult.astroconsult.Chat.FirebaseAuthUtil;
 import in.astroconsult.astroconsult.Interface.ApiClient;
 import in.astroconsult.astroconsult.pajo.ResponseModel;
 import in.astroconsult.astroconsult.ui.BookFragment;
@@ -23,6 +25,7 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.squareup.picasso.Picasso;
 
 public class AstroHome extends AppCompatActivity {
@@ -110,4 +113,9 @@ public class AstroHome extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        FirebaseAuthUtil.setCurrentUserOnline(false);
+    }
 }

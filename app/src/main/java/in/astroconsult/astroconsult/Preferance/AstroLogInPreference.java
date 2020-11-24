@@ -25,8 +25,11 @@ public class AstroLogInPreference {
     }
 
     public void setClear()
-    {
-        sharedPreferencesAstro.edit().remove("AstroLogged").apply();
+    { SharedPreferences.Editor editor = sharedPreferencesAstro.edit();
+        editor.clear();
+        editor.apply();
+
+        //sharedPreferencesAstro.edit().remove("AstroLogged").apply();
     }
 
     public Boolean getLogged()

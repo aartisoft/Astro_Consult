@@ -450,18 +450,24 @@ public class ProfileFragment extends Fragment {
                         String phone = s.hasChild("phone") ? s.child("phone").getValue().toString() : null;
                         if (phone != null && phone.equals(user.get(position).getMobile())) {
 
+                            String online =  s.hasChild("online") ? s.child("online").getValue().toString() : "";
 
-                            Intent intent = new Intent(getContext(), ChatActivity.class);
-                            intent.putExtra("user_id", s.getKey().toString());
-                            intent.putExtra("astro_mobile", mobileAstrologer);
-                            if(getMaxMinutesToChat()!=0){
-                                intent.putExtra("maxMinutesToChat", getMaxMinutesToChat());
+                            if(true){
+                                Intent intent = new Intent(getContext(), ChatActivity.class);
+                                intent.putExtra("user_id", s.getKey().toString());
+                                intent.putExtra("astro_mobile", mobileAstrologer);
+                                if(getMaxMinutesToChat()!=0){
+                                    intent.putExtra("maxMinutesToChat", getMaxMinutesToChat());
+                                }
+                                intent.putExtra("user_name", s.hasChild("name") ? s.child("name").toString() : "");
+                                startActivity(intent);
+                            }else {
+                                Snackbar.make(locationName, "Astrologer not active now, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                             }
-                            intent.putExtra("user_name", s.hasChild("name") ? s.child("name").toString() : "");
-                            startActivity(intent);
                             break;
                         } else {
-                            Snackbar.make(locationName, "Astrologer not active now, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                            Snackbar.make(locationName, "There is something wrong with Astrologer!", Snackbar.LENGTH_SHORT).show();
+                            //Snackbar.make(locationName, "Astrologer not active now, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                         }
                     }
                 }

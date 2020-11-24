@@ -117,4 +117,17 @@ public class FirebaseAuthUtil {
             }
         });
     }
+
+    public static void setCurrentUserOnline(Object online)
+    {
+        DatabaseReference mRootRef;
+        String mCurrentUserId;
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            mCurrentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            mRootRef = FirebaseDatabase.getInstance().getReference();
+            mRootRef.keepSynced(true);
+            mRootRef.child("Users").child(mCurrentUserId).child("online").setValue(online);
+        }
+
+    }
 }

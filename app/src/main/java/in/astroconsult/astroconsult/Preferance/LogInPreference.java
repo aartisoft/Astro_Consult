@@ -26,7 +26,10 @@ public class LogInPreference {
 
     public void setClear()
     {
-        sharedPreferencesUser.edit().remove("loggedin").apply();
+        SharedPreferences.Editor editor = sharedPreferencesUser.edit();
+        editor.clear();
+        editor.apply();
+        //sharedPreferencesUser.edit().remove("loggedin").apply();
         //sharedPreferencesUser.edit().remove("Name").apply();
         //sharedPreferencesUser.edit().remove("Mobile").apply();
         //sharedPreferencesUser.edit().remove("Email").apply();

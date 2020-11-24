@@ -23,7 +23,8 @@
         android:layout_marginStart="10dp"
         android:layout_alignTop="@+id/user_single_image"
         android:layout_toEndOf="@+id/user_single_image"
-        android:text="Display Name"
+        android:text=""
+        android:fontFamily="@font/montserrat_regular"
         android:textAllCaps="true"
         android:textColor="@android:color/black"
         android:textSize="18dp" />
@@ -55,7 +56,9 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/user_single_image"
         android:layout_alignStart="@+id/user_single_name"
-        android:text="User Default Status"
+        android:text=""
+        android:fontFamily="@font/montserrat_regular"
+        android:layout_below="@+id/user_single_name"
         android:textColor="@android:color/black"
         android:textSize="17dp" />
 
