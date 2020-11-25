@@ -207,9 +207,9 @@ public class ChatActivity extends AppCompatActivity {
         });
 
     }
-
+    Boolean isRefillDialogShown = false;
     private void endChatDueToOfflinePresence(String receiverName) {
-        if (!ChatActivity.this.isFinishing()) {
+        if (!ChatActivity.this.isFinishing() && !isRefillDialogShown) {
             new AlertDialog.Builder(ChatActivity.this)
                     .setCancelable(false)
                     .setTitle(receiverName + " got offline!")
@@ -218,11 +218,14 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which)
                         {
-                            if (LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
+                            isRefillDialogShown = false;
+                            if (LogInPreference.getInstance(ChatActivity.this).getUser() !=null &&
+                                    LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
                                 //I'm user, so sending summary before going back to profileFragment
                                 sendChatSummary(true);
                             }
-                            else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro().equals("IsAstrologer"))
+                            else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro()!=null
+                            && AstroLogInPreference.getInstance(ChatActivity.this).getAstro().equals("IsAstrologer"))
                             {
                                 //I'm astrologer, so going back to conversationActivity
                                 finish();
@@ -241,6 +244,7 @@ public class ChatActivity extends AppCompatActivity {
 //                        }
 //                    })
                     .show();
+            isRefillDialogShown = true;
         }
 
     }
@@ -490,11 +494,13 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
                     {
-                        if (LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
+                        if (LogInPreference.getInstance(ChatActivity.this).getUser() != null &&
+                                LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
                             //I'm user, so sending summary before going back to profileFragment
                             sendChatSummary(true);
                         }
-                        else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro() .equals("IsAstrologer"))
+                        else if (AstroLogInPreference.getInstance(ChatActivity.this).getAstro()!= null
+                        && AstroLogInPreference.getInstance(ChatActivity.this).getAstro() .equals("IsAstrologer"))
                         {
                             //I'm astrologer, so going back to conversationActivity
                             finish();

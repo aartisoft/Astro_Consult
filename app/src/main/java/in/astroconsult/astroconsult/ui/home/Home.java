@@ -1,5 +1,6 @@
 package in.astroconsult.astroconsult.ui.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +15,7 @@ import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 import java.util.ArrayList;
 import java.util.List;
 
+import in.astroconsult.astroconsult.Chat.ConversationActivity;
 import in.astroconsult.astroconsult.Constants;
 import in.astroconsult.astroconsult.R;
 import in.astroconsult.astroconsult.RecyclerAdapter;
@@ -99,11 +101,15 @@ public class Home extends Fragment {
                                                    Constants.search_area.setVisibility(View.GONE);
                                                    break;
                                                case HELP_ID:
-                                                   select_fragment = new Help();
+//                                                   select_fragment = new Help();
                                                    Constants.toolbar.setTitle("Help 24X7");
                                                    Constants.search_area.setVisibility(View.GONE);
+
+                                                   startActivity(new Intent(getContext(), ConversationActivity.class));
+
                                                    break;
                                            }
+                                           if(select_fragment!=null)
                                            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, select_fragment).commit();
                                        }
                                    });
