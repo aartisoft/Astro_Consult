@@ -1,4 +1,4 @@
-package in.astroconsult.astroconsult.ui;
+package in.astroconsult.astroconsult;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -9,7 +9,6 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,24 +38,26 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.astroconsult.astroconsult.Chat.ChatActivity;
-import in.astroconsult.astroconsult.Chat.ConversationActivity;
 import in.astroconsult.astroconsult.Chat.Messages;
 import in.astroconsult.astroconsult.Chat.Users;
 import in.astroconsult.astroconsult.Interface.ApiClient;
 import in.astroconsult.astroconsult.Preferance.AstroLogInPreference;
 import in.astroconsult.astroconsult.Preferance.LogInPreference;
-import in.astroconsult.astroconsult.R;
 import in.astroconsult.astroconsult.Response.GetAstrologerResponse;
 import in.astroconsult.astroconsult.Response.HomeAstroResponse;
 import in.astroconsult.astroconsult.Response.WalletBalanceResponse;
+import in.astroconsult.astroconsult.ui.Help;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Help extends Fragment {
+
+public class AstroConversations extends Fragment {
+
+    public AstroConversations() {
+        // Required empty public constructor
+    }
+
     private DatabaseReference mMessageRef;
     private DatabaseReference mUserDatabase;
     private FirebaseAuth mAuth;
@@ -73,12 +74,6 @@ public class Help extends Fragment {
     ArrayList<GetAstrologerResponse> astrologers = new ArrayList<>();
     String mobile = LogInPreference.getMobileNo();
     String walletAmount;
-
-    
-    public Help() {
-        // Required empty public constructor
-    }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -155,6 +150,8 @@ public class Help extends Fragment {
                 mUserDatabase.child(mChatUserId).addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        Log.d("patchsharma", "ondatasetchange");
                         if (dataSnapshot.hasChild("name")) {
                             final String userName = dataSnapshot.child("name").getValue().toString();
                             final String online = dataSnapshot.hasChild("online") ? dataSnapshot.child("online").getValue().toString() : "";
@@ -389,7 +386,7 @@ public class Help extends Fragment {
             }
         });
     }
-    
+
     @Override
     public void onDestroy() {
         super.onDestroy();

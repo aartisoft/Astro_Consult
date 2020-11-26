@@ -45,6 +45,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import in.astroconsult.astroconsult.BuildConfig;
+import in.astroconsult.astroconsult.Chat.FirebaseAuthUtil;
 import in.astroconsult.astroconsult.Interface.ApiClient;
 import in.astroconsult.astroconsult.Interface.Utility;
 import in.astroconsult.astroconsult.R;
@@ -372,6 +373,7 @@ public class P1_Update_Account extends AppCompatActivity {
                         Picasso.get().load(R.drawable.rinku).into(updatePhoto);
                     } else {
                         Picasso.get().load(response.body().getPhoto()).into(updatePhoto);
+                        FirebaseAuthUtil.updateProfilePic(response.body().getPhoto());
                     }
                 }
 

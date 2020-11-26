@@ -159,7 +159,7 @@ public class AstroHomeFragment extends Fragment {
                         astrologerName.setText(response.body().getName());
                         astrologerSpeciality.setText(response.body().getSpeciality().get(0));
                         Picasso.get().load(response.body().getPhoto()).into(astrologerImage);
-
+                        FirebaseAuthUtil.updateProfilePic(response.body().getPhoto());
                         progressDialog.dismiss();
                     }
 

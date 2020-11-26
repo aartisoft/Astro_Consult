@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.etebarian.meowbottomnavigation.MeowBottomNavigation;
 
 import androidx.fragment.app.Fragment;
-import in.astroconsult.astroconsult.AstroWalletFragment;
+import in.astroconsult.astroconsult.AstroConversations;
 import in.astroconsult.astroconsult.Chat.ConversationActivity;
 import in.astroconsult.astroconsult.R;
 
@@ -74,8 +73,8 @@ public class MoreFragment extends Fragment {
                         break;
 
                     case ASTRO_WALLET_ID:
-                        startActivity(new Intent(getContext(), ConversationActivity.class));
-                        //loadFragment( new AstroWalletFragment());
+                       // startActivity(new Intent(getContext(), ConversationActivity.class));
+                        loadFragment( new AstroConversations());
                         //Toast.makeText(getActivity(), "sele4", Toast.LENGTH_SHORT).show();
 
                         // select_fragment = new AstroWalletFragment();

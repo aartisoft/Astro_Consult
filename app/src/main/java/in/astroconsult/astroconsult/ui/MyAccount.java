@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 
+import in.astroconsult.astroconsult.Chat.FirebaseAuthUtil;
 import in.astroconsult.astroconsult.Interface.ApiClient;
 import in.astroconsult.astroconsult.LogIn;
 import in.astroconsult.astroconsult.Preferance.LogInPreference;
@@ -113,9 +114,11 @@ public class MyAccount extends Fragment {
                     emailAstro.setText(mobile);
                     mobileAstro.setText(email);
                     if (response.body().getPhoto().isEmpty()) {
-                        Picasso.get().load(R.drawable.rinku).into(image);                    }
+                        Picasso.get().load(R.drawable.rinku).into(image);
+                    }
                     else
                     {
+                        FirebaseAuthUtil.updateProfilePic(response.body().getPhoto());
                         Picasso.get().load(response.body().getPhoto()).into(image);
                     }
                 }

@@ -101,12 +101,10 @@ public class Home extends Fragment {
                                                    Constants.search_area.setVisibility(View.GONE);
                                                    break;
                                                case HELP_ID:
-//                                                   select_fragment = new Help();
+                                                   select_fragment = new Help();
                                                    Constants.toolbar.setTitle("Help 24X7");
                                                    Constants.search_area.setVisibility(View.GONE);
-
-                                                   startActivity(new Intent(getContext(), ConversationActivity.class));
-
+                                                   //startActivity(new Intent(getContext(), ConversationActivity.class));
                                                    break;
                                            }
                                            if(select_fragment!=null)
