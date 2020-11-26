@@ -53,6 +53,7 @@ import in.astroconsult.astroconsult.AstroLogIn;
 import in.astroconsult.astroconsult.AstroOtp;
 import in.astroconsult.astroconsult.AstroOtpEditProfile;
 import in.astroconsult.astroconsult.AstroOtpVerify;
+import in.astroconsult.astroconsult.Constants;
 import in.astroconsult.astroconsult.Interface.ApiClient;
 import in.astroconsult.astroconsult.MainActivity;
 import in.astroconsult.astroconsult.Preferance.AstroLogInPreference;
@@ -60,6 +61,8 @@ import in.astroconsult.astroconsult.Preferance.LogInPreference;
 import in.astroconsult.astroconsult.R;
 import in.astroconsult.astroconsult.Response.AstroLogInResponse;
 import in.astroconsult.astroconsult.Response.EndChatResponse;
+import in.astroconsult.astroconsult.services.SendEndChatService;
+import in.astroconsult.astroconsult.services.StickyService;
 import in.astroconsult.astroconsult.ui.Wallet;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -74,7 +77,8 @@ public class ChatActivity extends AppCompatActivity {
     final int chargableAmountPerMin = 60; //amount to be charged per minute
     Timer billingTimer;
 
-    int secondsCount, minutesCount, maxMinutesToChat;
+    static int secondsCount;
+    int minutesCount, maxMinutesToChat;
 
     private Toolbar mChatToolbar;
 
@@ -98,20 +102,38 @@ public class ChatActivity extends AppCompatActivity {
 
     private String mChatUser; //this is opposite party in chat
     private String mUserName;
-    private String astroMobile ;
+    private static String astroMobile ;
 
 
     //TextView countDownTv;
     Button endChat;
     private PinView timerPinView;
-    private Timer chatTimer;
+    private static Timer chatTimer;
+
+    private static ChatActivity instance;
+    private static Context context;
+
+    public static ChatActivity getInstance(){
+        return instance;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
-
+        instance = this;
+        context = this;
         getSupportActionBar().hide();
+        secondsCount = 0;
+
+        chatTimer = null;
+
+        if(LogInPreference.getInstance(ChatActivity.this).getUser()!=null &&
+                LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
+            Intent stickyService = new Intent(getApplicationContext(), SendEndChatService.class);
+            startService(stickyService);
+        }
 
         timerPinView = findViewById(R.id.timer_pin_view);
         //countDownTv = (TextView) findViewById(R.id.textTimmer);
@@ -147,12 +169,18 @@ public class ChatActivity extends AppCompatActivity {
                         timerPinView.setText(String.format("%02d:%02d:%02d", secondsCount / 3600,
                                 (secondsCount % 3600) / 60, (secondsCount % 60)));
 
+                        Log.d("patchsharma", "ayaaaa1111");
+                        /*if((secondsCount / 60) >= maxMinutesToChat){
+                            showRefillAmmount();
+                            chatTimer.cancel();
+                            Log.d("patchsharma", "ayaaaa22222");
+                        }*/
                         if(LogInPreference.getInstance(ChatActivity.this).getUser()!=null &&
                                 LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")) {
                             if((secondsCount / 60) >= maxMinutesToChat){
                                 showRefillAmmount();
                                 chatTimer.cancel();
-                                Log.d("patchsharma", "ayaaaa");
+                                Log.d("patchsharma", "ayaaaa22222");
                             }
                         }
                     }
@@ -397,13 +425,34 @@ public class ChatActivity extends AppCompatActivity {
         return true;
     }*/
 
+    public static void cancelChatTimer(){
+        if(chatTimer!=null){
+            chatTimer.cancel();
+        }
+    }
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        instance = null;
+        Log.d("patchsharma", "onDestroy");
+
+        chatTimer.cancel();
         if(LogInPreference.getInstance(ChatActivity.this).getUser()!=null &&
                 LogInPreference.getInstance(ChatActivity.this).getUser().equals("IsUser")){
             setCurrentUserOnline(ServerValue.TIMESTAMP);
-        }      //  sendChatSummary(false);
+
+          /*  String userMobile = LogInPreference.getInstance(this).getMobileNo();
+            String sentTime = String.format("%02d:%02d", (secondsCount % 3600) / 60, (secondsCount % 60));
+            //TODO - mm:ss format
+            String timestamp = getCurrentIsoDateTime();
+            Intent stickyService = new Intent(getApplicationContext(), StickyService.class);
+            stickyService.putExtra(Constants.SUMMARY_END_CHAT_ASTRO_MOB, astroMobile);
+            stickyService.putExtra(Constants.SUMMARY_END_CHAT_USER_MOB, userMobile);
+            stickyService.putExtra(Constants.SUMMARY_END_CHAT_TIMESTAMP, timestamp);
+            stickyService.putExtra(Constants.SUMMARY_END_CHAT_DURATION, sentTime);
+            startService(stickyService);*/
+        }
     }
 
     private void sendMessage() {
@@ -522,9 +571,11 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     public void showRefillAmmount(){
+        Log.d("patchsharma", "showRefillAmmount");
         if(!ChatActivity.this.isFinishing())
         {
-            new AlertDialog.Builder(this)
+            Log.d("patchsharma", "showRefillAmmount + isFinishing");
+            new AlertDialog.Builder(ChatActivity.this)
                     .setTitle("Attention !")
                     .setCancelable(false)
                     .setMessage("Your wallet has not sufficient amount to continue the chat, Recharge your wallet")
@@ -532,7 +583,7 @@ public class ChatActivity extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which)
                         {
-                            finish();
+                           finish();
                             sendChatSummary(false);
                         }
                     })
@@ -540,7 +591,43 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    private void sendChatSummary(final Boolean isProgressShown) {
+    public static void resetValues(){
+        secondsCount = 0;
+        astroMobile = null;
+    }
+
+    public static void sendChatSummary1() {
+        String userMobile = LogInPreference.getInstance(context).getMobileNo();
+//        String duration = timerPinView.getText().toString();
+
+        String sentTime = String.format("%02d:%02d", (secondsCount % 3600) / 60, (secondsCount % 60));
+        //TODO - mm:ss format
+        String timestamp = getCurrentIsoDateTime();
+        Call<EndChatResponse> call = ApiClient.getCliet().endChat(API_KEY, astroMobile, userMobile, timestamp, sentTime);
+        Log.d("patchsharma", "endchat");
+        call.enqueue(new Callback<EndChatResponse>() {
+            @Override
+            public void onResponse(Call<EndChatResponse> call, Response<EndChatResponse> response) {
+                Log.d("patchsharma", "endchat onResponse");
+                if (response.isSuccessful()) {
+                    EndChatResponse endChatResponse = response.body();
+                    //TODO :- Add code below according to API response handling
+                    //Snackbar.make(mChatSendBtn, endChatResponse.getMessage(), Snackbar.LENGTH_SHORT).show();
+                }
+                else {
+                    //ChatActivity.super.onBackPressed();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EndChatResponse> call, Throwable throwable) {
+                Log.d("patchsharma", "endchat onFailure");
+            }
+        });
+
+    }
+
+    public void sendChatSummary(final Boolean isProgressShown) {
         final ProgressDialog dialog = new ProgressDialog(this);
         if(isProgressShown){
             dialog.setCancelable(false);
@@ -554,11 +641,13 @@ public class ChatActivity extends AppCompatActivity {
         //TODO - mm:ss format
         String timestamp = getCurrentIsoDateTime();
         Call<EndChatResponse> call = ApiClient.getCliet().endChat(API_KEY, astroMobile, userMobile, timestamp, sentTime);
+        Log.d("patchsharma", "endchat");
         call.enqueue(new Callback<EndChatResponse>() {
             @Override
             public void onResponse(Call<EndChatResponse> call, Response<EndChatResponse> response) {
                 if(isProgressShown)
                     dialog.dismiss();
+                Log.d("patchsharma", "endchat onResponse");
                 if (response.isSuccessful()) {
                     EndChatResponse endChatResponse = response.body();
                     //TODO :- Add code below according to API response handling
@@ -582,7 +671,7 @@ public class ChatActivity extends AppCompatActivity {
 
     }
 
-    public String getCurrentIsoDateTime() {
+    public static String getCurrentIsoDateTime() {
         TimeZone tz = TimeZone.getTimeZone("UTC");
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
         df.setTimeZone(tz);

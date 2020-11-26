@@ -154,7 +154,6 @@ public class ProfileFragment extends Fragment {
         StrictMode.VmPolicy.Builder builder1 = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder1.build());
 
-        last();
 
 
         uploadface.setOnClickListener(new View.OnClickListener() {
@@ -437,6 +436,11 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        last();
+    }
 
     private void fetchAstroDetails() {
 

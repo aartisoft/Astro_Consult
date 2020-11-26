@@ -9,7 +9,10 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -23,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -82,6 +86,7 @@ public class P1_Update_Account extends AppCompatActivity {
         spinner = findViewById(R.id.starShineSpinner);
         photo = findViewById(R.id.uploadPhotoEdit);
         submit = findViewById(R.id.updateUser);
+        //rotatePhoto = findViewById(R.id.rotateImage);
         selectImage = findViewById(R.id.selectImage);
         updatePhoto = findViewById(R.id.uploadPhotoEdit);
 
@@ -114,6 +119,13 @@ public class P1_Update_Account extends AppCompatActivity {
                 selectImage();
             }
         });
+
+//        rotatePhoto.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                photo.setRotation(photo.getRotation()+90);
+//            }
+//        });
 
         n = getIntent().getStringExtra("profile_name");
         e = getIntent().getStringExtra("profile_email");
@@ -201,6 +213,7 @@ public class P1_Update_Account extends AppCompatActivity {
                 if (options[item].equals("Take Photo")) {
                     Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+                    //intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION,90);
                     //  File file = File(getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS + "/attachments").getPath(),
                     //         System.currentTimeMillis()+ ".jpg");
                     File f = new File(android.os.Environment.getExternalStorageDirectory(), "image.jpg");
@@ -218,7 +231,7 @@ public class P1_Update_Account extends AppCompatActivity {
                     Log.e("capturemedia file url", "" + captureMediaFile);
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, captureMediaFile);
                     intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
-                    intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                    intent.putExtra(MediaStore.EXTRA_SCREEN_ORIENTATION, ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
                     startActivityForResult(intent, 1);
                 } else if (options[item].equals("Choose from Gallery")) {
                     Intent intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -231,20 +244,18 @@ public class P1_Update_Account extends AppCompatActivity {
         builder.show();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @SuppressLint("LongLogTag")
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //SharedPreferences sharedpreferences = P1_Update_Account.this.getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
-        //SharedPreferences.Editor edit = sharedpreferences.edit();
+
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 File f = new File(Environment.getExternalStorageDirectory().toString());
                 for (File temp : f.listFiles()) {
                     if (temp.getName().equals("temp.jpg")) {
                         f = temp;
-                        // photfile = f.getAbsoluteFile();
-
                         break;
                     }
                 }
@@ -256,24 +267,20 @@ public class P1_Update_Account extends AppCompatActivity {
                     Log.d("334455", "photfile: " + photfile);
                     Log.d("334455", "onActivityResultabc: " + f.getAbsolutePath());
                     Log.d("334455", "onActivityResultbitmp: " + bitmap);
-                    photo.setImageBitmap(bitmap);
+                    //photo.setImageBitmap(bitmap);
+
+                    rotateImage(bitmap);
 
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 25, baos); //bm is the bitmap object
                     byte[] b = baos.toByteArray();
 
-                    // Uri pic =  getImageUri(EditProfileActivity.this,bitmap);
-                    //       picturePath = String.valueOf(pic);
-                    //  encodedimg = Base64.encodeToString(b, Base64.DEFAULT);
-
-                    //  Log.d("123456", "1245: "+encodedimg);
                     FileOutputStream fos = new FileOutputStream(photfile);
                     fos.write(b);
                     fos.flush();
                     fos.close();
                     Log.d("334455", "onActivityResultbitmp: " + photfile);
                     Log.d("334455", "fos: " + fos);
-
 
                     String path = android.os.Environment
                             .getExternalStorageDirectory()
@@ -308,6 +315,34 @@ public class P1_Update_Account extends AppCompatActivity {
             }
         }
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.Q)
+    private void rotateImage(Bitmap bitmap1)
+    {
+        ExifInterface exifInterface = null;
+        try {
+            exifInterface = new ExifInterface(photfile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);
+        Matrix matrix = new Matrix();
+        switch (orientation)
+        {
+            case ExifInterface.ORIENTATION_ROTATE_90:
+                matrix.setRotate(90);
+                break;
+
+            case ExifInterface.ORIENTATION_ROTATE_180:
+                matrix.setRotate(180);
+                break;
+
+            default:
+        }
+        Bitmap rotatedBitmap = Bitmap.createBitmap(bitmap1,0,0,bitmap1.getWidth(),bitmap1.getHeight(),matrix,true);
+        photo.setImageBitmap(rotatedBitmap);
     }
 
     public void getProfile() {

@@ -1,7 +1,10 @@
 package in.astroconsult.astroconsult.Chat;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,11 +38,13 @@ import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import in.astroconsult.astroconsult.Interface.ApiClient;
+import in.astroconsult.astroconsult.Preferance.AstroLogInPreference;
 import in.astroconsult.astroconsult.Preferance.LogInPreference;
 import in.astroconsult.astroconsult.R;
 import in.astroconsult.astroconsult.Response.GetAstrologerResponse;
 import in.astroconsult.astroconsult.Response.HomeAstroResponse;
 import in.astroconsult.astroconsult.Response.WalletBalanceResponse;
+import in.astroconsult.astroconsult.ui.Wallet;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -74,9 +80,10 @@ public class ConversationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_conversations);
         mToolbar = findViewById(R.id.toolbar);
         //setSupportActionBar(mToolbar);
-        productSub();
         initViews();
+
     }
+
 
     private void initViews() {
         mchatUsersList = (RecyclerView) findViewById(R.id.chat_list);
@@ -140,6 +147,7 @@ public class ConversationActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
+                        Log.d("patchsharma", "ondatasetchange");
                         if (dataSnapshot.hasChild("name")) {
                             final String userName = dataSnapshot.child("name").getValue().toString();
                             final String online = dataSnapshot.hasChild("online") ? dataSnapshot.child("online").getValue().toString() : "";
@@ -149,6 +157,17 @@ public class ConversationActivity extends AppCompatActivity {
                             if (message_type.equals("text")) {
                                 ChatViewHolder.userLastPhotoMsg.setVisibility(View.GONE);
                                 ChatViewHolder.setLastMsg(lastMsg);
+                            }
+                            if(online!=null && online instanceof String && online.equals("true")){
+                                ChatViewHolder.userSingleOnlineIcon.setColorFilter(
+                                        ChatViewHolder.userSingleOnlineIcon.getContext().getResources().getColor(R.color.green),
+                                        PorterDuff.Mode.SRC_ATOP);
+                                ChatViewHolder.userSingleOnlineIcon.setVisibility(View.VISIBLE);
+                            }else {
+                                ChatViewHolder.userSingleOnlineIcon.setColorFilter(
+                                        ChatViewHolder.userSingleOnlineIcon.getContext().getResources().getColor(R.color.red),
+                                        PorterDuff.Mode.SRC_ATOP);
+                                ChatViewHolder.userSingleOnlineIcon.setVisibility(View.VISIBLE);
                             }
 
 //                        else if (message_type.equals("image"))
@@ -161,30 +180,93 @@ public class ConversationActivity extends AppCompatActivity {
                             ChatViewHolder.mView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
-                                    if (online.equals("true")) {
-                                        Intent chatIntent = new Intent(ConversationActivity.this, ChatActivity.class);
-                                        chatIntent.putExtra("user_id", mChatUserId);
-                                        chatIntent.putExtra("user_name", userName);
-                                        if (LogInPreference.getInstance(ConversationActivity.this).getUser() != null &&
-                                                LogInPreference.getInstance(ConversationActivity.this).getUser().equals("IsUser")) {
 
-                                            if(walletAmount != null){
-                                                if (getMaxMinutesToChat(phone) != 0) {
-                                                    chatIntent.putExtra("maxMinutesToChat", getMaxMinutesToChat(phone));
-                                                    chatIntent.putExtra("astro_mobile", phone);
+                                    if (AstroLogInPreference.getInstance(ConversationActivity.this).getAstro()!=null
+                                            && AstroLogInPreference.getInstance(ConversationActivity.this).getAstro().equals("IsAstrologer")) {
+                                        if (online.equals("true")) {
+                                            Intent chatIntent = new Intent(ConversationActivity.this, ChatActivity.class);
+                                            chatIntent.putExtra("user_id", mChatUserId);
+                                            chatIntent.putExtra("user_name", userName);
+                                            if (LogInPreference.getInstance(ConversationActivity.this).getUser() != null &&
+                                                    LogInPreference.getInstance(ConversationActivity.this).getUser().equals("IsUser")) {
+
+                                                if(walletAmount != null){
+                                                    if (getMaxMinutesToChat(phone) != 0) {
+                                                        chatIntent.putExtra("maxMinutesToChat", getMaxMinutesToChat(phone));
+                                                        chatIntent.putExtra("astro_mobile", phone);
+                                                    }else {
+                                                        Snackbar.make(mchatUsersList,
+                                                                "null walletamount, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                                                    }
                                                 }else {
                                                     Snackbar.make(mchatUsersList,
-                                                            "null walletamount, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                                                            "There is some problem with walletamount, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                                                 }
-                                            }else {
-                                                Snackbar.make(mchatUsersList,
-                                                        "There is some problem with walletamount, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                                             }
+                                            startActivity(chatIntent);
+                                        } else {
+                                            Snackbar.make(mchatUsersList,
+                                                    "User is not active, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
                                         }
-                                        startActivity(chatIntent);
-                                    } else {
-                                        Snackbar.make(mchatUsersList,
-                                                "User is not active, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                                    }else {
+                                        Float perMinCharge = getPerMinCharge(phone);
+                                        if (walletAmount != null && Float.parseFloat(walletAmount) >= perMinCharge) {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(ConversationActivity.this);
+                                            builder.setTitle("Start Chat");
+                                            builder.setMessage("You will be charged Rs." + perMinCharge + " per minute. Do you want to Continue?");
+                                            builder.setPositiveButton("Continue", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    if (online.equals("true")) {
+                                                        Intent chatIntent = new Intent(ConversationActivity.this, ChatActivity.class);
+                                                        chatIntent.putExtra("user_id", mChatUserId);
+                                                        chatIntent.putExtra("user_name", userName);
+                                                        if (LogInPreference.getInstance(ConversationActivity.this).getUser() != null &&
+                                                                LogInPreference.getInstance(ConversationActivity.this).getUser().equals("IsUser")) {
+
+                                                            if(walletAmount != null){
+                                                                if (getMaxMinutesToChat(phone) != 0) {
+                                                                    chatIntent.putExtra("maxMinutesToChat", getMaxMinutesToChat(phone));
+                                                                    chatIntent.putExtra("astro_mobile", phone);
+                                                                }else {
+                                                                    Snackbar.make(mchatUsersList,
+                                                                            "null walletamount, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                                                                }
+                                                            }else {
+                                                                Snackbar.make(mchatUsersList,
+                                                                        "There is some problem with walletamount, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                                                            }
+                                                        }
+                                                        startActivity(chatIntent);
+                                                    } else {
+                                                        Snackbar.make(mchatUsersList,
+                                                                "User is not active, Please try again Later!!!", Snackbar.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            });
+                                            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
+
+                                            AlertDialog dialog = builder.create();
+                                            dialog.show();
+                                        } else {
+                                            AlertDialog.Builder builder = new AlertDialog.Builder(ConversationActivity.this);
+                                            builder.setTitle("Wallet Amount Low!!");
+                                            builder.setMessage("Your amount is low for this service. You need minimum wallet amount of Rupees " + perMinCharge + ". Refill your wallet now.");
+                                            builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            });
+
+                                            AlertDialog dialog = builder.create();
+                                            dialog.show();
+                                        }
                                     }
                                 }
                             });
@@ -199,6 +281,11 @@ public class ConversationActivity extends AppCompatActivity {
             }
         };
         mchatUsersList.setAdapter(firebaseRecyclerAdapter);
+    }
+
+    private boolean isWalletSufficient(String phone) {
+
+        return false;
     }
 
 
@@ -236,6 +323,16 @@ public class ConversationActivity extends AppCompatActivity {
             Toast.makeText(ConversationActivity.this, "" + e, Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    public Float getPerMinCharge(String phone) {
+        for (GetAstrologerResponse astrologerResponse : astrologers) {
+            if (astrologerResponse.getMobile().equals(phone)) {
+                Float perMinCharge = Float.valueOf(astrologerResponse.getCcharge());
+                return perMinCharge;
+            }
+        }
+        return 0f;
     }
 
     private int getMaxMinutesToChat(String phone) {
@@ -291,26 +388,29 @@ public class ConversationActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        FirebaseAuthUtil.setCurrentUserOnline(ServerValue.TIMESTAMP);
+       // FirebaseAuthUtil.setCurrentUserOnline(ServerValue.TIMESTAMP);
 
     }
+
 
     @Override
     public void onResume() {
         super.onResume();
-        FirebaseAuthUtil.setCurrentUserOnline(true);
+        productSub();
+        //FirebaseAuthUtil.setCurrentUserOnline(true);
     }
 
     public static class ChatViewHolder extends RecyclerView.ViewHolder {
         View mView;
         TextView userNameView;
         TextView userLastMsgView;
-        ImageView userLastPhotoMsg;
+        ImageView userLastPhotoMsg, userSingleOnlineIcon;
         CircleImageView userImageView;
 
         public ChatViewHolder(View view) {
             super(view);
             mView = view;
+            userSingleOnlineIcon= (ImageView) view.findViewById(R.id.user_single_online_icon);
             userNameView = (TextView) view.findViewById(R.id.user_single_name);
             userLastMsgView = (TextView) view.findViewById(R.id.user_single_status);
             userLastPhotoMsg = (ImageView) view.findViewById(R.id.last_photo_msg);

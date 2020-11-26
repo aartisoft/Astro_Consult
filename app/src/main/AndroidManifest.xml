@@ -10,6 +10,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
 android:name=".Root"
@@ -84,8 +85,7 @@ android:name=".Root"
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <service
-            android:name=".NotificationService"
+        <service android:name=".NotificationService"
             android:label="@string/app_name">
 
         </service>
@@ -94,6 +94,10 @@ android:name=".Root"
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <service android:name=".services.StickyService" />
+        <service android:name=".services.SendEndChatService" />
+
     </application>
 
 </manifest>

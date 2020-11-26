@@ -34,11 +34,11 @@
         android:id="@+id/user_single_online_icon"
         android:layout_width="30dp"
         android:layout_height="25dp"
-        android:src="@drawable/ic_email_black_24dp"
+        android:src="@drawable/bullet_green"
         android:layout_toRightOf="@+id/user_single_name"
         android:layout_alignTop="@+id/user_single_image"
         android:layout_marginLeft="10dp"
-        android:visibility="invisible"/>
+        android:visibility="visible"/>
 
 
     <ImageView
@@ -62,6 +62,8 @@
         android:textColor="@android:color/black"
         android:textSize="17dp" />
 
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -72,4 +74,19 @@
         android:layout_marginTop="15dp"
         android:layout_marginRight="8dp"
         />
+
+    <TextView
+        android:id="@+id/tv_unreadcount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:text="0"
+        android:visibility="gone"
+        android:cursorVisible="true"
+        android:layout_marginEnd="5dp"
+        android:layout_centerVertical="true"
+        android:padding="4dp"
+        android:textColor="@color/white"
+        android:background="@drawable/message_text_background"
+        android:textSize="16sp"/>
 </RelativeLayout>

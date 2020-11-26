@@ -119,10 +119,16 @@ public class Wallet extends Fragment implements PaymentResultWithDataListener {
             }
         });
 
-        balance();
-        last();
+
 
         return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        balance();
+        last();
     }
 
     private void getList(String url) {
