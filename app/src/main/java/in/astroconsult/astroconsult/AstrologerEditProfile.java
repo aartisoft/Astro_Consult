@@ -93,6 +93,14 @@ public class AstrologerEditProfile extends AppCompatActivity {
     ArrayList<String> id = new ArrayList<String>();
     ArrayList<String> sid = new ArrayList<String>();
     ArrayList<String> eid = new ArrayList<String>();
+
+    ArrayList<String> storeSpeciality = new ArrayList<>();
+    ArrayList<String> storeExpertise = new ArrayList<>();
+    ArrayList<String> storeLanguages = new ArrayList<>();
+    ArrayList<Boolean> specialityChecked = new ArrayList<>();
+    ArrayList<Boolean> expertiseChecked = new ArrayList<>();
+    ArrayList<Boolean> languageChecked = new ArrayList<>();
+
     Timming  timss = new Timming();
     EditText mondayStartTime,mondayEndTime,tuesdayStartTime,tuesayEndTime,wednesdayStartTime,wednesdayEndTime,thursdayStartTime,thursdayEndTime,fridayStartTime,fridayEndTime,saturdayStartTime,saturdayEndTime,sundayStartTime,sundayEndTime;
 
@@ -1079,15 +1087,15 @@ public class AstrologerEditProfile extends AppCompatActivity {
                 {
                     Toast.makeText(context, "Please Fill Your Profile", Toast.LENGTH_SHORT).show();
                 }
-                else if (selectedexpertiseStrings.size() == 0)
+                else if (storeExpertise.size() == 0)
                 {
                     Toast.makeText(context, "Please select expertise", Toast.LENGTH_SHORT).show();
                 }
-                else if (selectedspectyStrings.size() == 0)
+                else if (storeSpeciality.size() == 0)
                 {
                     Toast.makeText(context, "Please select speciality", Toast.LENGTH_SHORT).show();
                 }
-                else if (selectedlangStrings.size() == 0)
+                else if (storeLanguages.size() == 0)
                 {
                     Toast.makeText(context, "Please select language", Toast.LENGTH_SHORT).show();
                 }
@@ -1103,7 +1111,7 @@ public class AstrologerEditProfile extends AppCompatActivity {
                 {
                     Toast.makeText(context, "Please Enter Face Values", Toast.LENGTH_SHORT).show();
                 }
-                else if (photo == null)
+                else if (photoYour.getDrawable() == null)
                 {
                     Toast.makeText(context, "Please Upload Photo", Toast.LENGTH_SHORT).show();
                 }
@@ -1311,6 +1319,16 @@ public class AstrologerEditProfile extends AppCompatActivity {
             }
         }
 
+        for(String tempList : languageList) {//tempList is  a variable
+            languageChecked.add(storeLanguages.contains(tempList) ? true : false);
+            Log.d("checkExpertise",expertiseChecked.toString());
+        }
+
+        boolean[] arrayLanguage = new boolean[languageChecked.size()];
+        for (int i = 0; i < languageChecked.size(); i++) {
+            arrayLanguage[i] = languageChecked.get(i);
+        }
+
         final ArrayList<Integer> selectedList = new ArrayList<>();
         selectedList.clear();
 
@@ -1318,7 +1336,7 @@ public class AstrologerEditProfile extends AppCompatActivity {
         builder.setTitle("Choose Languages");
 // add a checkbox list
         Log.d("list2", languageList.toString());
-        builder.setMultiChoiceItems(languageList.toArray(new String[0]), null, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setMultiChoiceItems(languageList.toArray(new String[0]), arrayLanguage, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 // user checked or unchecked a box
@@ -1789,7 +1807,7 @@ public class AstrologerEditProfile extends AppCompatActivity {
         doc[0] = MultipartBody.Part.createFormData("documents[0]", photofile.getPath(), mainpvi);
         doc[1] = MultipartBody.Part.createFormData("documents[1]", photofile.getPath(), pen);
         doc[2] = MultipartBody.Part.createFormData("documents[2]", photofile.getPath(), adhsr);
-       // maindoc[0] = MultipartBody.Part.createFormData("photo", photofile.getPath(), mainpvi);
+        maindoc[0] = MultipartBody.Part.createFormData("photo", photofile.getPath(), mainpvi);
 
         Call<EditProfileResponse> call = ApiClient.getCliet().uploadSurvey(api_key,multipartexper,multipartlang,multipartspecy,multipartTypedOutput,doc,maindoc,signUpMap);
         call.enqueue(new Callback<EditProfileResponse>() {
@@ -1799,16 +1817,25 @@ public class AstrologerEditProfile extends AppCompatActivity {
                 if (response.isSuccessful())
                 {
                     dialog.dismiss();
-                    Toast.makeText(AstrologerEditProfile.this, "fff"+response.body().getMessage(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(AstrologerEditProfile.this,AstrologerEditProfile.class);
                     startActivity(intent);
+                }
+                else if (response.body().getStatus() != 200)
+                {
+                    dialog.dismiss();
+                    Toast.makeText(AstrologerEditProfile.this, response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    dialog.dismiss();
+                    Toast.makeText(AstrologerEditProfile.this, "Something Went wrong", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<EditProfileResponse> call, Throwable throwable) {
                 dialog.dismiss();
-                Toast.makeText(AstrologerEditProfile.this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(AstrologerEditProfile.this,"Please Select Photo"+throwable, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -2023,13 +2050,23 @@ public class AstrologerEditProfile extends AppCompatActivity {
             }
         }
 
+        for(String tempList : speList) {//tempList is  a variable
+            expertiseChecked.add(storeExpertise.contains(tempList) ? true : false);
+            Log.d("checkExpertise",expertiseChecked.toString());
+        }
+
+        boolean[] arrayExpertise = new boolean[expertiseChecked.size()];
+        for (int i = 0; i < expertiseChecked.size(); i++) {
+            arrayExpertise[i] = expertiseChecked.get(i);
+        }
+
         final ArrayList<Integer> selectedList = new ArrayList<>();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Choose Expertise");
 // add a checkbox list
         Log.d("list2", speList.toString());
-        builder.setMultiChoiceItems(speList.toArray(new String[0]), null, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setMultiChoiceItems(speList.toArray(new String[0]),arrayExpertise, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 // user checked or unchecked a box
@@ -2083,23 +2120,40 @@ public class AstrologerEditProfile extends AppCompatActivity {
 
         }
 
+        for(String tempList : speList) {//tempList is  a variable
+            specialityChecked.add(storeSpeciality.contains(tempList) ? true : false);
+            Log.d("checkSpeciality",specialityChecked.toString());
+        }
+
+        boolean[] arraySpeciality = new boolean[specialityChecked.size()];
+        for (int i = 0; i < specialityChecked.size(); i++) {
+            arraySpeciality[i] = specialityChecked.get(i);
+        }
+
         final ArrayList<Integer> selectedList = new ArrayList<>();
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Choose Specility");
-// add a checkbox list
+        builder.setTitle("Choose Speciality");
+        // add a checkbox list
         Log.d("list2", speList.toString());
-        builder.setMultiChoiceItems(speList.toArray(new String[0]), null, new DialogInterface.OnMultiChoiceClickListener() {
+        builder.setMultiChoiceItems(speList.toArray(new String[0]),arraySpeciality, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 // user checked or unchecked a box
-                if (isChecked) {
-                    selectedList.add(which);
-                } else if (selectedList.contains(which)) {
+                if (isChecked)
+                {
+                    if (!selectedList.contains(which))
+                    {
+                        selectedList.add(which);
+                    }
+                }
+                else if (selectedList.contains(which))
+                {
                     selectedList.remove(which);
                 }
             }
         });
+        builder.setCancelable(false);
 // add OK and Cancel buttons
         builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
             @Override
@@ -2116,7 +2170,12 @@ public class AstrologerEditProfile extends AppCompatActivity {
 
             }
         });
-        builder.setNegativeButton("Cancel", null);
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
 // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -2143,6 +2202,25 @@ public class AstrologerEditProfile extends AppCompatActivity {
                     panNo.setText(response.body().getPan());
                     charges.setText(response.body().getCcharge());
                     profile.setText(response.body().getProfile());
+
+                    for (int i = 0; i < response.body().getSpeciality().size(); i++)
+                    {
+                        storeSpeciality.add(response.body().getSpeciality().get(i));
+                        Log.d("specialityList",storeSpeciality.toString());
+                    }
+
+                    for (int i = 0; i < response.body().getExpertise().size(); i++)
+                    {
+                        storeExpertise.add(response.body().getExpertise().get(i));
+                        Log.d("expertiseList",storeExpertise.toString());
+                    }
+
+                    for (int i = 0; i < response.body().getLanguages().size(); i++)
+                    {
+                        storeLanguages.add(response.body().getLanguages().get(i));
+                        Log.d("languageList",storeLanguages.toString());
+                    }
+
                     faceEdit.setText(response.body().getFcharge());
 
                         if (response.body().getPalmreader().equalsIgnoreCase("Yes")) {

@@ -90,7 +90,7 @@ public class AstroProfileSignUp extends AppCompatActivity {
     ArrayList<String> id = new ArrayList<>();
     ArrayList<String> sid = new ArrayList<>();
     ArrayList<String> eid = new ArrayList<String>();
-    String Arrexper[];
+    boolean[] languageChecked,specialityChecked,expertiseChecked;
     String sundayStringStar, sundayStringEnd, mondayStringStart, mondayStringEnd, tuesdayStringStart, tuesdayStringEnd, wednesdayStringStart, wednesdayStringEnd, thursdayStringStart, thursdayStringEnd, fridayStringStart, fridayStringEnd, saturdayStringStart, saturdayStringEnd;
 
     ArrayList<SpeliyDataModel> SpeliyDatalist = new ArrayList<>();
@@ -1011,163 +1011,6 @@ public class AstroProfileSignUp extends AppCompatActivity {
                         }
                         //Toast.makeText(AstroProfileSignUp.this, ""+selectedTimeStrings, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
-                        /*if (sundayStringStar == null || sundayStringEnd == null) {
-                            Toast.makeText(AstroProfileSignUp.this, "nothing to be added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            JSONObject dataToSend = new JSONObject();
-
-                            JSONObject jsonObjectsunst = new JSONObject();
-                            JSONObject jsonObjectsuned = new JSONObject();
-
-                            try {
-                                jsonObjectsunst.put("sundaystart"+":", sundayStringStar);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                jsonObjectsuned.put("sundayend"+":", sundayStringEnd);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-
-                            jsonArraytimimg.put(jsonObjectsunst);
-                            jsonArraytimimg.put(jsonObjectsuned);
-
-
-
-                            selectedTimeStrings.add(sundayStringStar);
-                            selectedTimeStrings.add(sundayStringEnd);
-                        }
-                        if (mondayStringStart == null || mondayStringEnd == null) {
-                            Toast.makeText(AstroProfileSignUp.this, "nothing to be added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            JSONObject jsonObjectmonst = new JSONObject();
-                            JSONObject jsonObjectmoned = new JSONObject();
-
-                            try {
-                                jsonObjectmonst.put("mondaystart"+":",mondayStart);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                jsonObjectmoned.put("mondayend"+":",mondayEnd);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            jsonArraytimimg.put(jsonObjectmonst);
-                            jsonArraytimimg.put(jsonObjectmoned);
-
-                            selectedTimeStrings.add(mondayStringStart);
-                            selectedTimeStrings.add(mondayStringEnd);
-                        }
-                        if (tuesdayStringStart == null || tuesdayStringEnd == null) {
-                            Toast.makeText(AstroProfileSignUp.this, "nothing to be added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            JSONObject jsonObjecttuesst = new JSONObject();
-                            JSONObject jsonObjecttuesed = new JSONObject();
-
-                            try {
-                                jsonObjecttuesst.put("tuesdaystart"+":",tuesdayStart);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                jsonObjecttuesed.put("tuesdayend"+":", tuesdayEnd);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            jsonArraytimimg.put(jsonObjecttuesst);
-                            jsonArraytimimg.put(jsonObjecttuesed);
-                            selectedTimeStrings.add(tuesdayStringStart);
-                            selectedTimeStrings.add(tuesdayStringEnd);
-                        }
-                        if (wednesdayStringStart == null || wednesdayStringEnd == null) {
-                            Toast.makeText(AstroProfileSignUp.this, "nothing to be added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            JSONObject jsonObjectwedst = new JSONObject();
-                            JSONObject jsonObjectweded = new JSONObject();
-
-                            try {
-                                jsonObjectwedst.put(" wednesdayStart"+":",  wednesdayStart);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                jsonObjectweded.put("wednesdayEnd"+":", wednesdayEnd);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            jsonArraytimimg.put(jsonObjectwedst);
-                            jsonArraytimimg.put(jsonObjectweded);
-                            selectedTimeStrings.add(wednesdayStringStart);
-                            selectedTimeStrings.add(wednesdayStringEnd);
-                        }
-                        if (thursdayStringStart == null || thursdayStringEnd == null) {
-                            Toast.makeText(AstroProfileSignUp.this, "nothing to be added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            JSONObject jsonObjectthured = new JSONObject();
-                            JSONObject jsonObjectthurst = new JSONObject();
-
-                            try {
-                                jsonObjectthurst.put("thursdayStart"+":",  thursdayStart);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                jsonObjectthured.put("thursdayEnd"+":", thursdayEnd);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            jsonArraytimimg.put(jsonObjectthurst);
-                            jsonArraytimimg.put(jsonObjectthured);
-                            selectedTimeStrings.add(thursdayStringStart);
-                            selectedTimeStrings.add(thursdayStringEnd);
-                        }
-                        if (fridayStringStart == null || fridayStringEnd == null) {
-                            Toast.makeText(AstroProfileSignUp.this, "nothing to be added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            JSONObject jsonObjectfried = new JSONObject();
-                            JSONObject jsonObjectfrist = new JSONObject();
-
-                            try {
-                                jsonObjectfrist.put("fridayStart"+":",  fridayStart);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                jsonObjectfried.put("fridayEnd"+":", fridayEnd);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            jsonArraytimimg.put(jsonObjectfrist);
-                            jsonArraytimimg.put(jsonObjectfried);
-                            selectedTimeStrings.add(thursdayStringStart);
-                            selectedTimeStrings.add(thursdayStringEnd);
-                            selectedTimeStrings.add(fridayStringStart);
-                            selectedTimeStrings.add(fridayStringEnd);
-                        }
-
-                        if (saturdayStringStart == null || saturdayStringEnd == null) {
-                            Toast.makeText(AstroProfileSignUp.this, "nothing to be added", Toast.LENGTH_SHORT).show();
-                        } else {
-                            JSONObject jsonObjectsatst = new JSONObject();
-                            JSONObject jsonObjectsated = new JSONObject();
-
-                            try {
-                                jsonObjectsatst.put("saturdayStart"+":",  saturdayStart);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            try {
-                                jsonObjectsated.put("saturdayEnd"+":", saturdayEnd);
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                            jsonArraytimimg.put(jsonObjectsatst);
-                            jsonArraytimimg.put(jsonObjectsated);
-                            selectedTimeStrings.add(saturdayStringStart);
-                            selectedTimeStrings.add(saturdayStringEnd);*/
 
                         //Toast.makeText(AstroProfileSignUp.this, "" + selectedTimeStrings, Toast.LENGTH_SHORT).show();
                         dialog.dismiss();
@@ -1442,17 +1285,24 @@ public class AstroProfileSignUp extends AppCompatActivity {
         final List<String> languageList = new ArrayList<>();
         final List<String> languageIdList = new ArrayList<>();
         Log.d("list", languageList.toString());
-        for (LanguageResponse languageResponse : body) {
+
+        for (LanguageResponse languageResponse : body)
+        {
             language = languageResponse.getName();
             langId = languageResponse.getId();
             listLanguage = language.split(",");
             languList = langId.split(",");
-            for (int i = 0; i < listLanguage.length; i++) {
+
+            for (int i = 0; i < listLanguage.length; i++)
+            {
                 languageList.add(listLanguage[i]);
             }
-            for (int i = 0; i < listLanguage.length; i++) {
+
+            for (int i = 0; i < listLanguage.length; i++)
+            {
                 languageIdList.add(listLanguage[i]);
             }
+
         }
 
         final ArrayList<Integer> selectedList = new ArrayList<>();
@@ -1460,35 +1310,58 @@ public class AstroProfileSignUp extends AppCompatActivity {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Choose Languages");
-// add a checkbox list
+        // add a checkbox list
         Log.d("list2", languageList.toString());
-        builder.setMultiChoiceItems(languageList.toArray(new String[0]), null, new DialogInterface.OnMultiChoiceClickListener() {
+
+        builder.setMultiChoiceItems(languageList.toArray(new String[0]),null, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 // user checked or unchecked a box
-                if (isChecked) {
-                    selectedList.add(which);
-                } else if (selectedList.contains(which)) {
+                if (isChecked)
+                {
+                    if (!selectedList.contains(which))
+                    {
+                        selectedList.add(which);
+                    }
+                }
+                else if (selectedList.contains(which))
+                {
                     selectedList.remove(which);
                 }
             }
         });
-// add OK and Cancel button
+        builder.setCancelable(false);
+        // add OK and Cancel button
         builder.setPositiveButton("DONE", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // user clicked OK
                 for (int j = 0; j < selectedList.size(); j++) {
-                    //selectedlangStrings.clear();
+
                     selectedlangStrings.add(languageList.get(selectedList.get(j)));
                     id.add(languageIdList.get(selectedList.get(j)));
-                    //languages.setText(selectedlangStrings.get(j));
+
                 }
                 //Toast.makeText(getApplicationContext(), "Items selected are: " + Arrays.toString(selectedlangStrings.toArray()), Toast.LENGTH_SHORT).show();
             }
         });
-        builder.setNegativeButton("Cancel", null);
-// create and show the alert dialog
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNeutralButton("Clear", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                for (int k = 0; k<languageChecked.length;i++)
+                {
+                    languageChecked[i] = false;
+                    selectedList.clear();
+                }
+            }
+        });
+        // create and show the alert dialog
         AlertDialog dialog = builder.create();
         dialog.show();
     }

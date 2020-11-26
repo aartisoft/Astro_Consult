@@ -42,7 +42,10 @@ android:name=".Root"
         <activity android:name=".Chat.ChatActivity" />
         <activity
             android:name=".AstroProfileSignUp"
-            android:windowSoftInputMode="adjustPan"></activity>
+            android:windowSoftInputMode="adjustPan">
+
+
+        </activity>
         <activity android:name=".AstrologerSignUp" />
         <activity android:name=".AstroOtp" />
         <activity android:name=".AstroOtpVerify" />

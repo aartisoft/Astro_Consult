@@ -132,8 +132,6 @@ public class P1_Update_Account extends AppCompatActivity {
         m = getIntent().getStringExtra("profile_mobile");
         s = getIntent().getStringExtra("profile_starshine");
 
-        getProfile();
-
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -201,6 +199,12 @@ public class P1_Update_Account extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getProfile();
     }
 
     private void selectImage() {
